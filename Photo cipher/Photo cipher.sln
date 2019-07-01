@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.539
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Photo cipher", "Photo cipher\Photo cipher.csproj", "{56FFB1EF-C8DA-4E83-A236-76AD8E805588}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56FFB1EF-C8DA-4E83-A236-76AD8E805588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56FFB1EF-C8DA-4E83-A236-76AD8E805588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56FFB1EF-C8DA-4E83-A236-76AD8E805588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56FFB1EF-C8DA-4E83-A236-76AD8E805588}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {568698B5-72C9-4F43-8BD1-3279EE79F254}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,19 @@
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\bin\Debug\Photo cipher.exe.config
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\bin\Debug\Photo cipher.exe
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\bin\Debug\Photo cipher.pdb
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo cipher.csprojAssemblyReference.cache
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Form1.resources
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Properties.Resources.resources
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo cipher.csproj.GenerateResource.cache
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo cipher.csproj.CoreCompileInputs.cache
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo cipher.exe
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo cipher.pdb
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.GetKey.resources
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\bin\Debug\EntityFramework.dll
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\bin\Debug\EntityFramework.xml
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo cipher.csproj.CopyComplete
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Migrations.InitialCreate.resources
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Migrations.AddCompanyMigration.resources
+C:\Users\ylian13\source\repos\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Watching.resources
