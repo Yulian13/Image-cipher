@@ -45,6 +45,7 @@ namespace Photo_cipher
             FolderBrowserDialog FilePath = new FolderBrowserDialog();
             if (FilePath.ShowDialog() != DialogResult.OK)
                 return;
+            buttonAdd.Enabled = false;
             backgroundWorkerAdding.RunWorkerAsync(FilePath.SelectedPath);
         }
 
@@ -89,15 +90,8 @@ namespace Photo_cipher
             {
                 if (backgroundWorkerAdding.CancellationPending == true)
                 {
-                    DialogResult result = MessageBox.Show("Do you really want to cancel adding?", "Canceling",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2,
-                    MessageBoxOptions.DefaultDesktopOnly);
-
-                    if (result == DialogResult.OK)
-                    {
-                        e.Cancel = true;
-                        break;
-                    }
+                    e.Cancel = true;
+                    break;
                 }
 
                 backgroundWorkerAdding.ReportProgress(Images.Length);
@@ -128,7 +122,6 @@ namespace Photo_cipher
 
         private void backgroundWorkerAdding_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            composition = null;
 
             progressBar1.Value = 0;
             progressBar1.Visible = false;
@@ -148,11 +141,18 @@ namespace Photo_cipher
 
                 MessageBox.Show("Composition have been added");
             }
+            composition = null;
+            buttonAdd.Enabled = true;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            backgroundWorkerAdding.CancelAsync();
+            DialogResult result = MessageBox.Show("Do you really want to cancel adding?", "Canceling",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2,
+            MessageBoxOptions.DefaultDesktopOnly);
+
+            if(result == DialogResult.Yes) 
+                backgroundWorkerAdding.CancelAsync();
         }
 
         #endregion
@@ -172,7 +172,6 @@ namespace Photo_cipher
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            
             if (dataGridView1.SelectedRows.Count < 1)
                 return;
 

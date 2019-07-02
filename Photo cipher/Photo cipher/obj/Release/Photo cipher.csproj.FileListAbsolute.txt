@@ -1,0 +1,19 @@
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\Photo cipher.exe.config
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\Photo cipher.exe
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\Photo cipher.pdb
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\EntityFramework.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\EntityFramework.xml
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.csprojAssemblyReference.cache
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Form1.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.GetKey.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Migrations.InitialCreate.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Migrations.AddCompanyMigration.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Properties.Resources.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Watching.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.csproj.GenerateResource.cache
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.csproj.CoreCompileInputs.cache
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.csproj.CopyComplete
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.exe
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.pdb

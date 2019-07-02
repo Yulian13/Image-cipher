@@ -9,7 +9,7 @@ namespace Photo_cipher
 {
     class PhotoContext : DbContext
     {
-        public PhotoContext () : base("DefaultConnection") { }
+        public PhotoContext (string connect = "DefaultConnection") : base(connect) { }
 
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Composition> Compositions { get; set; }

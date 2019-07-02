@@ -34,7 +34,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonOriginalDeshifrovka = new System.Windows.Forms.ToolStripButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.LabelProgress = new System.Windows.Forms.ToolStripLabel();
+            this.LabelTest = new System.Windows.Forms.ToolStripLabel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +56,7 @@
             // buttonForward
             // 
             this.buttonForward.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonForward.Location = new System.Drawing.Point(833, 0);
+            this.buttonForward.Location = new System.Drawing.Point(827, 0);
             this.buttonForward.Name = "buttonForward";
             this.buttonForward.Size = new System.Drawing.Size(27, 611);
             this.buttonForward.TabIndex = 1;
@@ -68,18 +71,22 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(34, 34);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(793, 565);
+            this.pictureBox1.Size = new System.Drawing.Size(787, 565);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Watching_MouseClick);
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonOriginalDeshifrovka});
+            this.toolStripButtonOriginalDeshifrovka,
+            this.LabelTest,
+            this.toolStripProgressBar1,
+            this.LabelProgress});
             this.toolStrip1.Location = new System.Drawing.Point(28, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(805, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(799, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -91,29 +98,43 @@
             this.toolStripButtonOriginalDeshifrovka.Name = "toolStripButtonOriginalDeshifrovka";
             this.toolStripButtonOriginalDeshifrovka.Size = new System.Drawing.Size(53, 22);
             this.toolStripButtonOriginalDeshifrovka.Text = "Original";
+            this.toolStripButtonOriginalDeshifrovka.Click += new System.EventHandler(this.toolStripButtonOriginalDeshifrovka_Click);
             // 
-            // label1
+            // toolStripProgressBar1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(145, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "label1";
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(200, 22);
+            // 
+            // LabelProgress
+            // 
+            this.LabelProgress.Name = "LabelProgress";
+            this.LabelProgress.Size = new System.Drawing.Size(41, 22);
+            this.LabelProgress.Text = "Label1";
+            // 
+            // LabelTest
+            // 
+            this.LabelTest.Name = "LabelTest";
+            this.LabelTest.Size = new System.Drawing.Size(41, 22);
+            this.LabelTest.Text = "Label2";
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // Watching
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(860, 611);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(854, 611);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.buttonForward);
             this.Controls.Add(this.buttonBack);
             this.Name = "Watching";
             this.Text = "Watching";
-            this.SizeChanged += new System.EventHandler(this.Watching_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -129,6 +150,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonOriginalDeshifrovka;
-        private System.Windows.Forms.Label label1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.ToolStripLabel LabelProgress;
+        private System.Windows.Forms.ToolStripLabel LabelTest;
     }
 }

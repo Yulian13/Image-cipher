@@ -13,16 +13,20 @@ namespace Photo_cipher
     public partial class Watching : Form
     {
         Composition composition;
-        NewImage[] NewImage;
+        static NewImage[] NewImage;
+        static bool[] ReadyPhotos;
+        bool originDeshifrovka = true;
         string Key;
         int numberPhoto;
-        public int NumberPhoto {
-            get {
-                return numberPhoto;
-            }
-            set {
+        public int NumberPhoto
+        {
+            get => numberPhoto;
+            set
+            {
                 numberPhoto = value;
-                pictureBox1_Paint(NewImage[numberPhoto].image);
+                LabelTest.Text = $"Page: {NumberPhoto}/{ReadyPhotos.Length}";
+                pictureBox1_Paint((originDeshifrovka) ? NewImage[numberPhoto].image : 
+                    Librari.byteArrayToImage(composition.Photos.ElementAt<Photo>(NumberPhoto).Image));
             }
         }
 
@@ -36,19 +40,39 @@ namespace Photo_cipher
             this.composition = composition;
             this.Key = Key;
             this.Text = Librari.DeShifrovka(composition.Name, Key);
-
             NewImage = new NewImage[composition.NumberPhotos];
-            int i = 0;
-            foreach(var photo in composition.Photos)
-            {
-                NewImage[i] = new NewImage(Librari.byteArrayToImage(photo.Image));
-                NewImage[i++].DeShifrovkaImage(Key,photo.RightKey);
-            }
+            ReadyPhotos = new bool[composition.NumberPhotos];
+
+            toolStripProgressBar1.Maximum = composition.NumberPhotos;
+            backgroundWorker1.RunWorkerAsync(composition);
+
+            while (ReadyPhotos[0] != true) { }
+            NumberPhoto = 0;
         }
 
-        private void Watching_SizeChanged(object sender, EventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            int i = 0;
+            foreach(Photo photo in (e.Argument as Composition).Photos)
+            {
+                NewImage[i] = new NewImage(Librari.byteArrayToImage(photo.Image));
+                NewImage[i].DeShifrovkaImage(Key,photo.RightKey);
+                ReadyPhotos[i] = true;
+                backgroundWorker1.ReportProgress(++i);
+            }
 
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            LabelProgress.Text = $"{e.ProgressPercentage}/{NewImage.Length}";
+            toolStripProgressBar1.Value++;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            toolStripProgressBar1.Visible = false;
+            LabelProgress.Visible = false;
         }
 
         private void pictureBox1_Paint(Image sender, PaintEventArgs e = null)
@@ -58,7 +82,7 @@ namespace Photo_cipher
 
         private void buttonForward_Click(object sender, EventArgs e)
         {
-            if (NumberPhoto < composition.NumberPhotos-1)
+            if (NumberPhoto < composition.NumberPhotos-1 && ReadyPhotos[NumberPhoto+1] == true)
                 NumberPhoto++;
         }
 
@@ -66,6 +90,21 @@ namespace Photo_cipher
         {
             if (NumberPhoto > 0)
                 NumberPhoto--;
+        }
+
+        private void Watching_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Location.X < pictureBox1.Width / 2)
+                buttonBack_Click(null, null);
+            else
+                buttonForward_Click(null, null);
+        }
+
+        private void toolStripButtonOriginalDeshifrovka_Click(object sender, EventArgs e)
+        {
+            originDeshifrovka = !originDeshifrovka;
+            toolStripButtonOriginalDeshifrovka.Text = (originDeshifrovka) ? "origin" : "Deshifrovka" ;
+            NumberPhoto = NumberPhoto;
         }
     }
 }
