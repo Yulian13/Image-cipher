@@ -34,20 +34,21 @@
             this.buttonOpen = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.ButtonChangeKey = new System.Windows.Forms.ToolStripButton();
+            this.ButtonReset = new System.Windows.Forms.ToolStripButton();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.labelNameComposistion = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberPhotosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.compositionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.compositionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.compositionDataSet = new Photo_cipher.CompositionDataSet();
-            this.compositionsTableAdapter = new Photo_cipher.CompositionDataSetTableAdapters.CompositionsTableAdapter();
             this.backgroundWorkerAdding = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberPhotosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compositionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.compositionDataSet = new Photo_cipher.CompositionDataSet();
+            this.compositionsTableAdapter = new Photo_cipher.CompositionDataSetTableAdapters.CompositionsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -81,28 +82,40 @@
             this.pictureBox1.Location = new System.Drawing.Point(15, 53);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(250, 400);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
+            this.ButtonChangeKey,
+            this.ButtonReset});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(542, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(526, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // ButtonChangeKey
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(74, 22);
-            this.toolStripButton1.Text = "Change Key";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.ButtonChangeKey.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ButtonChangeKey.Image = ((System.Drawing.Image)(resources.GetObject("ButtonChangeKey.Image")));
+            this.ButtonChangeKey.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonChangeKey.Name = "ButtonChangeKey";
+            this.ButtonChangeKey.Size = new System.Drawing.Size(74, 22);
+            this.ButtonChangeKey.Text = "Change Key";
+            this.ButtonChangeKey.Click += new System.EventHandler(this.toolStripButtonChangeKey_Click);
+            // 
+            // ButtonReset
+            // 
+            this.ButtonReset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ButtonReset.Image = ((System.Drawing.Image)(resources.GetObject("ButtonReset.Image")));
+            this.ButtonReset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonReset.Name = "ButtonReset";
+            this.ButtonReset.Size = new System.Drawing.Size(39, 22);
+            this.ButtonReset.Text = "Reset";
+            this.ButtonReset.Click += new System.EventHandler(this.ButtonReset_Click);
             // 
             // buttonDelete
             // 
@@ -141,45 +154,10 @@
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 25;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // numberPhotosDataGridViewTextBoxColumn
-            // 
-            this.numberPhotosDataGridViewTextBoxColumn.DataPropertyName = "NumberPhotos";
-            this.numberPhotosDataGridViewTextBoxColumn.HeaderText = "NumberPhotos";
-            this.numberPhotosDataGridViewTextBoxColumn.Name = "numberPhotosDataGridViewTextBoxColumn";
-            this.numberPhotosDataGridViewTextBoxColumn.Width = 80;
-            // 
             // compositionsBindingSource
             // 
             this.compositionsBindingSource.DataMember = "Compositions";
             this.compositionsBindingSource.DataSource = this.compositionDataSetBindingSource;
-            // 
-            // compositionDataSetBindingSource
-            // 
-            this.compositionDataSetBindingSource.DataSource = this.compositionDataSet;
-            this.compositionDataSetBindingSource.Position = 0;
-            // 
-            // compositionDataSet
-            // 
-            this.compositionDataSet.DataSetName = "CompositionDataSet";
-            this.compositionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // compositionsTableAdapter
-            // 
-            this.compositionsTableAdapter.ClearBeforeFill = true;
             // 
             // backgroundWorkerAdding
             // 
@@ -207,6 +185,41 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Visible = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 25;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // numberPhotosDataGridViewTextBoxColumn
+            // 
+            this.numberPhotosDataGridViewTextBoxColumn.DataPropertyName = "NumberPhotos";
+            this.numberPhotosDataGridViewTextBoxColumn.HeaderText = "NumberPhotos";
+            this.numberPhotosDataGridViewTextBoxColumn.Name = "numberPhotosDataGridViewTextBoxColumn";
+            this.numberPhotosDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // compositionDataSetBindingSource
+            // 
+            this.compositionDataSetBindingSource.DataSource = this.compositionDataSet;
+            this.compositionDataSetBindingSource.Position = 0;
+            // 
+            // compositionDataSet
+            // 
+            this.compositionDataSet.DataSetName = "CompositionDataSet";
+            this.compositionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // compositionsTableAdapter
+            // 
+            this.compositionsTableAdapter.ClearBeforeFill = true;
             // 
             // Form1
             // 
@@ -244,7 +257,7 @@
         private System.Windows.Forms.Button buttonOpen;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton ButtonChangeKey;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Label labelNameComposistion;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -258,6 +271,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn numberPhotosDataGridViewTextBoxColumn;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.ToolStripButton ButtonReset;
     }
 }
 

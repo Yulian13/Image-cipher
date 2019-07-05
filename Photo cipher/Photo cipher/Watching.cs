@@ -16,7 +16,9 @@ namespace Photo_cipher
         static NewImage[] NewImages;
         static bool[] ReadyPhotos;
         bool Close = false;
+
         bool originDeshifrovka = true;
+        bool NormalZoom = true;
         string Key;
         int numberPhoto;
         public int NumberPhoto
@@ -25,9 +27,8 @@ namespace Photo_cipher
             set
             {
                 numberPhoto = value;
-                LabelTest.Text = $"Page: {NumberPhoto + 1}/{ReadyPhotos.Length}";
-                pictureBox1.Image = (originDeshifrovka) ? NewImages[numberPhoto].image : 
-                    Librari.byteArrayToImage(composition.Photos.ElementAt<Photo>(NumberPhoto).Image);
+                LabelView.Text = $"Page: {NumberPhoto + 1}/{ReadyPhotos.Length}";
+                ProgressBarView.Value = numberPhoto + 1;
                 pictureBox1_SizeChanged(null, null);
             }
         }
@@ -42,7 +43,8 @@ namespace Photo_cipher
             NewImages = new NewImage[composition.NumberPhotos];
             ReadyPhotos = new bool[composition.NumberPhotos];
 
-            toolStripProgressBar1.Maximum = composition.NumberPhotos;
+            ProgressBarView.Maximum     = composition.NumberPhotos;
+            ProgressBarProgress.Maximum = composition.NumberPhotos;
             backgroundWorker1.RunWorkerAsync(composition);
 
             while (ReadyPhotos[0] != true) { }
@@ -64,27 +66,28 @@ namespace Photo_cipher
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (!Close)
-            {
-                LabelProgress.Text = $"{e.ProgressPercentage}/{NewImages.Length}";
-                toolStripProgressBar1.Value++;
-            }
+            if (Close)
+                return;
+            LabelProgress.Text = $"{e.ProgressPercentage}/{NewImages.Length}";
+            ProgressBarProgress.Value++;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            toolStripProgressBar1.Visible = false;
+            ProgressBarProgress.Visible = false;
             LabelProgress.Visible = false;
         }
 
         private void buttonForward_Click(object sender, EventArgs e)
         {
+            panel1.VerticalScroll.Value = 0;
             if (NumberPhoto < composition.NumberPhotos-1 && ReadyPhotos[NumberPhoto+1] == true)
                 NumberPhoto++;
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
+            panel1.VerticalScroll.Value = 0;
             if (NumberPhoto > 0)
                 NumberPhoto--;
         }
@@ -95,17 +98,25 @@ namespace Photo_cipher
                 buttonBack_Click(null, null);
             else
                 buttonForward_Click(null, null);
-            
         }
 
         private void pictureBox1_SizeChanged(object sender, EventArgs e)
         {
-            int Width = panel1.Width - 20;
-            int Height = (int)(((double)pictureBox1.Image.Height / pictureBox1.Image.Width) * Width);
-            Size size = new Size(Width, Height);
-            Image newImage = new Bitmap(NewImages[NumberPhoto].image, size);
-            pictureBox1.Image = newImage;
-            pictureBox1.Size = size;
+            Image image = (originDeshifrovka) ? NewImages[numberPhoto].image :
+                    Librari.byteArrayToImage(composition.Photos.ElementAt<Photo>(NumberPhoto).Image);
+            if (NormalZoom)
+            {
+                int Width = panel1.Width - 20;
+                int Height = (int)(((double)image.Height / image.Width) * Width);
+                Size newSize = new Size(Width, Height);
+                pictureBox1.Image = new Bitmap(image, newSize);
+                pictureBox1.Size = newSize;
+            }
+            else
+            {
+                pictureBox1.Size = new Size(panel1.Width - 20, panel1.Height - 20);
+                pictureBox1.Image = image;
+            }
         }
 
         private void toolStripButtonOriginalDeshifrovka_Click(object sender, EventArgs e)
@@ -113,6 +124,15 @@ namespace Photo_cipher
             originDeshifrovka = !originDeshifrovka;
             toolStripButtonOriginalDeshifrovka.Text = (originDeshifrovka) ? "origin" : "Deshifrovka" ;
             NumberPhoto = NumberPhoto;
+        }
+
+        private void ButtonZoomNormal_Click(object sender, EventArgs e)
+        {
+            NormalZoom = !NormalZoom;
+            pictureBox1.SizeMode = (NormalZoom) ? PictureBoxSizeMode.CenterImage : PictureBoxSizeMode.Zoom;
+            pictureBox1.Image = NewImages[NumberPhoto].image;
+            ButtonZoomNormal.Text = (NormalZoom) ? "Zoom" : "Normal" ;
+            pictureBox1_SizeChanged(null,null);
         }
 
         private void Watching_FormClosing(object sender, FormClosingEventArgs e) => Close = true;

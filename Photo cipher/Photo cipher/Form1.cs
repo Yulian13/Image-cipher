@@ -23,6 +23,29 @@ namespace Photo_cipher
         string NameImages, NameKeys;        
         string Key;
 
+        private bool rightKey = true;
+        public bool RightKey {
+            get => rightKey;
+            set
+            {
+                if (RightKey == value)
+                    return;
+                rightKey = value;
+                if (RightKey)
+                {
+                    buttonAdd.Enabled    = true;
+                    buttonDelete.Enabled = true;
+                    buttonOpen.Enabled   = true;
+                }
+                else
+                {
+                    buttonAdd.Enabled    = false;
+                    buttonDelete.Enabled = false;
+                    buttonOpen.Enabled   = false;
+                }
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -36,7 +59,7 @@ namespace Photo_cipher
                 db.Compositions.Add(new Composition() {Name = "Crutch", NumberPhotos = 12 });// Crutch
             dataGridView1.DataSource = db.Compositions.Local.ToBindingList();
 
-            toolStripButton1_Click(null, null);
+            toolStripButtonChangeKey_Click(null, null);
         }
 
         #region Adding
@@ -167,7 +190,7 @@ namespace Photo_cipher
 
         #endregion
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void toolStripButtonChangeKey_Click(object sender, EventArgs e)
         {
             GetKey Key = new GetKey();
             Key.ShowDialog();
@@ -206,22 +229,24 @@ namespace Photo_cipher
                 else
                     pictureBox1.Width = (int)(pictureBox1.Width / RatioSize * newRatioSize);
                 pictureBox1.Image = new Bitmap(newImage.image, pictureBox1.Size);
-
+                RightKey = true;
             }
             catch(System.Security.Cryptography.CryptographicException) {
                 labelNameComposistion.Text = "Key is wrong: ";
-                pictureBox1.Image = null;
+                pictureBox1.Image = pictureBox1.ErrorImage;
+                RightKey = false;
             }
             catch (Exception)
             {
                 labelNameComposistion.Text = "Error";
-                pictureBox1.Image = null;
+                pictureBox1.Image = pictureBox1.ErrorImage;
+                RightKey = false;
             }
 
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
-        {
+        {            
             DialogResult result = MessageBox.Show("Do you really want to delete it?", "Deleting",
             MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2,
             MessageBoxOptions.DefaultDesktopOnly);
@@ -257,6 +282,12 @@ namespace Photo_cipher
 
             Watching watching = new Watching(db.Compositions.Find(id),Key);
             watching.Show();
+        }
+
+        private void ButtonReset_Click(object sender, EventArgs e)
+        {
+            this.Key = null;
+            dataGridView1_SelectionChanged(null, null);
         }
 
         private void Form1_Load(object sender, EventArgs e)
