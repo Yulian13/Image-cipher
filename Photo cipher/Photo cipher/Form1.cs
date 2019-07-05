@@ -32,6 +32,8 @@ namespace Photo_cipher
             db = new PhotoContext(); //@"Data Source=WIN-TUCQMTTP77C;Initial Catalog=Composition;Integrated Security=True;AttachDbFileName=D:\Anime\DataBase\Testing.mdf"
             db.Photos.Load();
             db.Compositions.Load();
+            if(db.Compositions.Count() == 0)
+                db.Compositions.Add(new Composition() {Name = "Crutch", NumberPhotos = 12 });// Crutch
             dataGridView1.DataSource = db.Compositions.Local.ToBindingList();
 
             toolStripButton1_Click(null, null);
@@ -46,6 +48,7 @@ namespace Photo_cipher
             if (FilePath.ShowDialog() != DialogResult.OK)
                 return;
             buttonAdd.Enabled = false;
+
             backgroundWorkerAdding.RunWorkerAsync(FilePath.SelectedPath);
         }
 
@@ -137,12 +140,19 @@ namespace Photo_cipher
                     db.Photos.Add(photo);
                 db.Compositions.Add(composition);
 
+                foreach(var prov in db.Compositions)
+                {
+                    if (prov.Name == "Crutch")
+                        db.Compositions.Remove(prov);
+                    break;
+                } // Crutch
+
                 db.SaveChanges();
 
                 MessageBox.Show("Composition have been added");
             }
-            composition = null;
             buttonAdd.Enabled = true;
+            composition = null;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -181,9 +191,9 @@ namespace Photo_cipher
             if (converted == false)
                 return;
 
-            Composition composition = db.Compositions.Find(id);
             try
             {
+                Composition composition = db.Compositions.Find(id);
                 labelNameComposistion.Text = Librari.DeShifrovka(composition.Name, Key);
                 Photo photo = composition.Photos.ElementAt<Photo>(0);
                 NewImage newImage = new NewImage(new Bitmap(Librari.byteArrayToImage(photo.Image)), null);
