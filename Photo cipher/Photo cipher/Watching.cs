@@ -15,7 +15,7 @@ namespace Photo_cipher
         Composition composition;
         static NewImage[] NewImages;
         static bool[] ReadyPhotos;
-        bool Close = false;
+        bool close = false;
 
         bool originDeshifrovka = true;
         bool NormalZoom = true;
@@ -66,16 +66,16 @@ namespace Photo_cipher
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (Close)
-                return;
+            if (close)
+                return; // Crutch
             LabelProgress1.Text = $"{e.ProgressPercentage}/{NewImages.Length}";
             ProgressBarProgress1.Value++;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (Close)
-                return;
+            if (close)
+                return; // Crutch
             ProgressBarProgress1.Visible = false;
             LabelProgress1.Visible = false;
             statusStrip1.Visible = false;
@@ -139,6 +139,6 @@ namespace Photo_cipher
             pictureBox1_SizeChanged(null,null);
         }
 
-        private void Watching_FormClosing(object sender, FormClosingEventArgs e) => Close = true;
+        private void Watching_FormClosing(object sender, FormClosingEventArgs e) => close = true;
     }
 }

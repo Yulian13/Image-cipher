@@ -36,18 +36,21 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.ButtonChangeKey = new System.Windows.Forms.ToolStripButton();
             this.ButtonReset = new System.Windows.Forms.ToolStripButton();
+            this.DownButtonMigration = new System.Windows.Forms.ToolStripDropDownButton();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.labelNameComposistion = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.compositionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.backgroundWorkerAdding = new System.ComponentModel.BackgroundWorker();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberPhotosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compositionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.compositionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.compositionDataSet = new Photo_cipher.CompositionDataSet();
+            this.backgroundWorkerAdding = new System.ComponentModel.BackgroundWorker();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.compositionsTableAdapter = new Photo_cipher.CompositionDataSetTableAdapters.CompositionsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -90,7 +93,8 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ButtonChangeKey,
-            this.ButtonReset});
+            this.ButtonReset,
+            this.DownButtonMigration});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(526, 25);
@@ -116,6 +120,32 @@
             this.ButtonReset.Size = new System.Drawing.Size(39, 22);
             this.ButtonReset.Text = "Reset";
             this.ButtonReset.Click += new System.EventHandler(this.ButtonReset_Click);
+            // 
+            // DownButtonMigration
+            // 
+            this.DownButtonMigration.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.DownButtonMigration.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToolStripMenuItem,
+            this.importToolStripMenuItem});
+            this.DownButtonMigration.Image = ((System.Drawing.Image)(resources.GetObject("DownButtonMigration.Image")));
+            this.DownButtonMigration.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DownButtonMigration.Name = "DownButtonMigration";
+            this.DownButtonMigration.Size = new System.Drawing.Size(72, 22);
+            this.DownButtonMigration.Text = "Migration";
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToolStripMenuItem.Text = "Export";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.buttonExport_Click);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importToolStripMenuItem.Text = "Import";
+            this.importToolStripMenuItem.Click += new System.EventHandler(this.buttonImport_Click);
             // 
             // buttonDelete
             // 
@@ -154,10 +184,41 @@
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 25;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // numberPhotosDataGridViewTextBoxColumn
+            // 
+            this.numberPhotosDataGridViewTextBoxColumn.DataPropertyName = "NumberPhotos";
+            this.numberPhotosDataGridViewTextBoxColumn.HeaderText = "NumberPhotos";
+            this.numberPhotosDataGridViewTextBoxColumn.Name = "numberPhotosDataGridViewTextBoxColumn";
+            this.numberPhotosDataGridViewTextBoxColumn.Width = 80;
+            // 
             // compositionsBindingSource
             // 
             this.compositionsBindingSource.DataMember = "Compositions";
             this.compositionsBindingSource.DataSource = this.compositionDataSetBindingSource;
+            // 
+            // compositionDataSetBindingSource
+            // 
+            this.compositionDataSetBindingSource.DataSource = this.compositionDataSet;
+            this.compositionDataSetBindingSource.Position = 0;
+            // 
+            // compositionDataSet
+            // 
+            this.compositionDataSet.DataSetName = "CompositionDataSet";
+            this.compositionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // backgroundWorkerAdding
             // 
@@ -185,37 +246,6 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Visible = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 25;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // numberPhotosDataGridViewTextBoxColumn
-            // 
-            this.numberPhotosDataGridViewTextBoxColumn.DataPropertyName = "NumberPhotos";
-            this.numberPhotosDataGridViewTextBoxColumn.HeaderText = "NumberPhotos";
-            this.numberPhotosDataGridViewTextBoxColumn.Name = "numberPhotosDataGridViewTextBoxColumn";
-            this.numberPhotosDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // compositionDataSetBindingSource
-            // 
-            this.compositionDataSetBindingSource.DataSource = this.compositionDataSet;
-            this.compositionDataSetBindingSource.Position = 0;
-            // 
-            // compositionDataSet
-            // 
-            this.compositionDataSet.DataSetName = "CompositionDataSet";
-            this.compositionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // compositionsTableAdapter
             // 
@@ -272,6 +302,9 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ToolStripButton ButtonReset;
+        private System.Windows.Forms.ToolStripDropDownButton DownButtonMigration;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
     }
 }
 
