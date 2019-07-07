@@ -44,7 +44,7 @@ namespace Photo_cipher
             ReadyPhotos = new bool[composition.NumberPhotos];
 
             ProgressBarView.Maximum     = composition.NumberPhotos;
-            ProgressBarProgress.Maximum = composition.NumberPhotos;
+            ProgressBarProgress1.Maximum = composition.NumberPhotos;
             backgroundWorker1.RunWorkerAsync(composition);
 
             while (ReadyPhotos[0] != true) { }
@@ -68,14 +68,17 @@ namespace Photo_cipher
         {
             if (Close)
                 return;
-            LabelProgress.Text = $"{e.ProgressPercentage}/{NewImages.Length}";
-            ProgressBarProgress.Value++;
+            LabelProgress1.Text = $"{e.ProgressPercentage}/{NewImages.Length}";
+            ProgressBarProgress1.Value++;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            ProgressBarProgress.Visible = false;
-            LabelProgress.Visible = false;
+            if (Close)
+                return;
+            ProgressBarProgress1.Visible = false;
+            LabelProgress1.Visible = false;
+            statusStrip1.Visible = false;
         }
 
         private void buttonForward_Click(object sender, EventArgs e)
@@ -104,6 +107,7 @@ namespace Photo_cipher
         {
             Image image = (originDeshifrovka) ? NewImages[numberPhoto].image :
                     Librari.byteArrayToImage(composition.Photos.ElementAt<Photo>(NumberPhoto).Image);
+            LabelProgress1.Margin = new Padding((int)(toolStrip1.Width * 0.4),3,0,2);
             if (NormalZoom)
             {
                 int Width = panel1.Width - 20;

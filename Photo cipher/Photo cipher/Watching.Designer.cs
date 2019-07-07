@@ -34,17 +34,19 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonOriginalDeshifrovka = new System.Windows.Forms.ToolStripButton();
+            this.ButtonZoomNormal = new System.Windows.Forms.ToolStripButton();
             this.LabelView = new System.Windows.Forms.ToolStripLabel();
-            this.LabelProgress = new System.Windows.Forms.ToolStripLabel();
-            this.ProgressBarProgress = new System.Windows.Forms.ToolStripProgressBar();
+            this.ProgressBarView = new System.Windows.Forms.ToolStripProgressBar();
+            this.LabelTest = new System.Windows.Forms.ToolStripLabel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ProgressBarView = new System.Windows.Forms.ToolStripProgressBar();
-            this.ButtonZoomNormal = new System.Windows.Forms.ToolStripButton();
-            this.LabelTest = new System.Windows.Forms.ToolStripLabel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.LabelProgress1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ProgressBarProgress1 = new System.Windows.Forms.ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonBack
@@ -52,7 +54,7 @@
             this.buttonBack.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonBack.Location = new System.Drawing.Point(0, 0);
             this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(28, 550);
+            this.buttonBack.Size = new System.Drawing.Size(25, 550);
             this.buttonBack.TabIndex = 0;
             this.buttonBack.Text = "<--";
             this.buttonBack.UseVisualStyleBackColor = true;
@@ -73,7 +75,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(856, 507);
+            this.pictureBox1.Size = new System.Drawing.Size(859, 486);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -86,24 +88,34 @@
             this.ButtonZoomNormal,
             this.LabelView,
             this.ProgressBarView,
-            this.LabelProgress,
-            this.ProgressBarProgress,
             this.LabelTest});
-            this.toolStrip1.Location = new System.Drawing.Point(28, 0);
+            this.toolStrip1.Location = new System.Drawing.Point(25, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(865, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(868, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripButtonOriginalDeshifrovka
             // 
+            this.toolStripButtonOriginalDeshifrovka.AutoSize = false;
             this.toolStripButtonOriginalDeshifrovka.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButtonOriginalDeshifrovka.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOriginalDeshifrovka.Image")));
             this.toolStripButtonOriginalDeshifrovka.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonOriginalDeshifrovka.Name = "toolStripButtonOriginalDeshifrovka";
-            this.toolStripButtonOriginalDeshifrovka.Size = new System.Drawing.Size(53, 22);
+            this.toolStripButtonOriginalDeshifrovka.Size = new System.Drawing.Size(73, 22);
             this.toolStripButtonOriginalDeshifrovka.Text = "Original";
             this.toolStripButtonOriginalDeshifrovka.Click += new System.EventHandler(this.toolStripButtonOriginalDeshifrovka_Click);
+            // 
+            // ButtonZoomNormal
+            // 
+            this.ButtonZoomNormal.AutoSize = false;
+            this.ButtonZoomNormal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ButtonZoomNormal.Image = ((System.Drawing.Image)(resources.GetObject("ButtonZoomNormal.Image")));
+            this.ButtonZoomNormal.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonZoomNormal.Name = "ButtonZoomNormal";
+            this.ButtonZoomNormal.Size = new System.Drawing.Size(51, 22);
+            this.ButtonZoomNormal.Text = "Zoom";
+            this.ButtonZoomNormal.Click += new System.EventHandler(this.ButtonZoomNormal_Click);
             // 
             // LabelView
             // 
@@ -111,16 +123,16 @@
             this.LabelView.Size = new System.Drawing.Size(41, 22);
             this.LabelView.Text = "Label2";
             // 
-            // LabelProgress
+            // ProgressBarView
             // 
-            this.LabelProgress.Name = "LabelProgress";
-            this.LabelProgress.Size = new System.Drawing.Size(41, 22);
-            this.LabelProgress.Text = "Label1";
+            this.ProgressBarView.Name = "ProgressBarView";
+            this.ProgressBarView.Size = new System.Drawing.Size(200, 22);
             // 
-            // ProgressBarProgress
+            // LabelTest
             // 
-            this.ProgressBarProgress.Name = "ProgressBarProgress";
-            this.ProgressBarProgress.Size = new System.Drawing.Size(200, 22);
+            this.LabelTest.Name = "LabelTest";
+            this.LabelTest.Size = new System.Drawing.Size(41, 22);
+            this.LabelTest.Text = "Label1";
             // 
             // backgroundWorker1
             // 
@@ -131,42 +143,43 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(28, 28);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(25, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(865, 519);
+            this.panel1.Size = new System.Drawing.Size(868, 525);
             this.panel1.TabIndex = 4;
             // 
-            // ProgressBarView
+            // statusStrip1
             // 
-            this.ProgressBarView.Name = "ProgressBarView";
-            this.ProgressBarView.Size = new System.Drawing.Size(200, 22);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.LabelProgress1,
+            this.ProgressBarProgress1});
+            this.statusStrip1.Location = new System.Drawing.Point(25, 528);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(868, 22);
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // ButtonZoomNormal
+            // LabelProgress1
             // 
-            this.ButtonZoomNormal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ButtonZoomNormal.Image = ((System.Drawing.Image)(resources.GetObject("ButtonZoomNormal.Image")));
-            this.ButtonZoomNormal.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonZoomNormal.Name = "ButtonZoomNormal";
-            this.ButtonZoomNormal.Size = new System.Drawing.Size(43, 22);
-            this.ButtonZoomNormal.Text = "Zoom";
-            this.ButtonZoomNormal.Click += new System.EventHandler(this.ButtonZoomNormal_Click);
+            this.LabelProgress1.Margin = new System.Windows.Forms.Padding(350, 3, 0, 2);
+            this.LabelProgress1.Name = "LabelProgress1";
+            this.LabelProgress1.Size = new System.Drawing.Size(86, 17);
+            this.LabelProgress1.Text = "LabelProgress1";
             // 
-            // LabelTest
+            // ProgressBarProgress1
             // 
-            this.LabelTest.Name = "LabelTest";
-            this.LabelTest.Size = new System.Drawing.Size(41, 22);
-            this.LabelTest.Text = "Label1";
+            this.ProgressBarProgress1.Name = "ProgressBarProgress1";
+            this.ProgressBarProgress1.Size = new System.Drawing.Size(100, 16);
             // 
             // Watching
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(920, 550);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.buttonForward);
@@ -179,6 +192,8 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,12 +207,13 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonOriginalDeshifrovka;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.ToolStripProgressBar ProgressBarProgress;
-        private System.Windows.Forms.ToolStripLabel LabelProgress;
         private System.Windows.Forms.ToolStripLabel LabelView;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripProgressBar ProgressBarView;
         private System.Windows.Forms.ToolStripButton ButtonZoomNormal;
         private System.Windows.Forms.ToolStripLabel LabelTest;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel LabelProgress1;
+        private System.Windows.Forms.ToolStripProgressBar ProgressBarProgress1;
     }
 }

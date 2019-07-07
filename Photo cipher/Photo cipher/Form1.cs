@@ -32,17 +32,9 @@ namespace Photo_cipher
                     return;
                 rightKey = value;
                 if (RightKey)
-                {
-                    buttonAdd.Enabled    = true;
-                    buttonDelete.Enabled = true;
                     buttonOpen.Enabled   = true;
-                }
                 else
-                {
-                    buttonAdd.Enabled    = false;
-                    buttonDelete.Enabled = false;
                     buttonOpen.Enabled   = false;
-                }
             }
         }
 
@@ -53,7 +45,6 @@ namespace Photo_cipher
             RatioSize = (float)pictureBox1.Width / pictureBox1.Height;
 
             db = new PhotoContext(); //@"Data Source=WIN-TUCQMTTP77C;Initial Catalog=Composition;Integrated Security=True;AttachDbFileName=D:\Anime\DataBase\Testing.mdf"
-            db.Photos.Load();
             db.Compositions.Load();
             if(db.Compositions.Count() == 0)
                 db.Compositions.Add(new Composition() {Name = "Crutch", NumberPhotos = 12 });// Crutch
@@ -242,7 +233,6 @@ namespace Photo_cipher
                 pictureBox1.Image = pictureBox1.ErrorImage;
                 RightKey = false;
             }
-
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
