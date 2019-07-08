@@ -19,9 +19,10 @@ namespace Photo_cipher
 
         public int NumberPhotos { get; set; }
 
+        public int? IdFirstPhoto { get; set; }
+
         public virtual ICollection<Photo> Photos { get; set; }
 
         public Composition() => Photos = new List<Photo>();
-
     }
 }

@@ -17,10 +17,10 @@ namespace Photo_cipher
     {
         static PhotoContext db;
         static Composition composition;
+        List<Photo> FirstPhotos = null;
 
         float RatioSize;
 
-        string NameImages, NameKeys;        
         string Key;
 
         int NowId {
@@ -63,6 +63,7 @@ namespace Photo_cipher
             db.Compositions.Load();
             if(db.Compositions.Count() == 0)
                 db.Compositions.Add(new Composition() {Name = "Crutch", NumberPhotos = 12 });// Crutch
+
             dataGridView1.DataSource = db.Compositions.Local.ToBindingList();
 
             toolStripButtonChangeKey_Click(null, null);
@@ -202,9 +203,6 @@ namespace Photo_cipher
             Key.ShowDialog();
             this.Key = Key.maskedTextBox1.Text;
 
-            NameImages  = Librari.Shifrovka("Images", this.Key);
-            NameKeys    = Librari.Shifrovka("Keys"  , this.Key);
-
             if(sender != null & e != null)
                 dataGridView1_SelectionChanged(null, null);
         }
@@ -218,7 +216,7 @@ namespace Photo_cipher
             {
                 Composition composition = db.Compositions.Find(id);
                 labelNameComposistion.Text = Librari.DeShifrovka(composition.Name, Key);
-                Photo photo = composition.Photos.ElementAt<Photo>(0);
+                Photo photo = db.Photos.Find(composition.IdFirstPhoto);
                 NewImage newImage = new NewImage(new Bitmap(Librari.byteArrayToImage(photo.Image)), null);
                 newImage.DeShifrovkaImage(Key, photo.RightKey);
 
@@ -228,7 +226,7 @@ namespace Photo_cipher
                     pictureBox1.Height = (int)(pictureBox1.Height * RatioSize / newRatioSize);
                 else
                     pictureBox1.Width = (int)(pictureBox1.Width / RatioSize * newRatioSize);
-                //pictureBox1.Image = new Bitmap(newImage.image, pictureBox1.Size);
+                pictureBox1.Image = new Bitmap(newImage.image, pictureBox1.Size);
                 RightKey = true;
             }
             catch(System.Security.Cryptography.CryptographicException) {
@@ -285,39 +283,51 @@ namespace Photo_cipher
 
         private void buttonExport_Click(object sender, EventArgs e)
         {
-            int id = NowId;
-            if (id < 0) return;
-
             FolderBrowserDialog DirectoryPath = new FolderBrowserDialog();
             if (DirectoryPath.ShowDialog() != DialogResult.OK)
                 return;
-            string path = DirectoryPath.SelectedPath +
-                ((DirectoryPath.SelectedPath.EndsWith("\\")) ? NameImages : $"\\{NameImages}");
-            Directory.CreateDirectory(path);
 
+            var SelectedCompositions = dataGridView1.SelectedRows.Cast<DataGridViewRow>().Select(i => i.Index).ToList();
             int NameId = 0;
-            while (true)
+            foreach (var index in SelectedCompositions)
             {
-                if (Directory.Exists(path + $"\\{NameId}"))
-                    NameId++;
-                else
-                    break;
+                if (dataGridView1.SelectedRows.Count < 1)
+                    return;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
+
+                string path = DirectoryPath.SelectedPath +
+                    ((DirectoryPath.SelectedPath.EndsWith("\\")) ? "CompositionImage" : "\\CompositionImage");
+                Directory.CreateDirectory(path);
+
+                while (true)
+                {
+                    if (Directory.Exists(path + $"\\{NameId}"))
+                        NameId++;
+                    else
+                        break;
+                }
+                Directory.CreateDirectory(path + $"\\{NameId}\\Keys");
+
+                string FilePath = path + $"\\{NameId}";
+
+                Composition composition = db.Compositions.Find(id);
+
+                File.WriteAllText(FilePath + "\\Text.txt", composition.Name);
+                int namberImage = 0;
+                foreach(Photo photo in composition.Photos)
+                {
+                    Image image = Librari.byteArrayToImage(photo.Image);
+                    image.Save(FilePath + $"\\{namberImage}image.jpg");
+                    File.WriteAllText(FilePath + $"\\Keys\\{namberImage}Key.txt", photo.RightKey);
+                    namberImage++;
+                }
+
             }
-            Directory.CreateDirectory(path + $"\\{NameId}\\{NameKeys}");
 
-            string FilePath = path + $"\\{NameId}";
-
-            Composition composition = db.Compositions.Find(id);
-
-            File.WriteAllText(FilePath + "\\Text.txt", composition.Name);
-            int namberImage = 0;
-            foreach(Photo photo in composition.Photos)
-            {
-                Image image = Librari.byteArrayToImage(photo.Image);
-                image.Save(FilePath + $"\\{namberImage}image.jpg");
-                File.WriteAllText(FilePath + $"\\{NameKeys}\\{namberImage}Key.txt", photo.RightKey);
-                namberImage++;
-            }
+            MessageBox.Show("Composition have been Exported");
         }
 
         private void buttonImport_Click(object sender, EventArgs e)

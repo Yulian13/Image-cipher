@@ -36,3 +36,4 @@ C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\P
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.csproj.CopyComplete
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.exe
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.pdb
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Migrations.AddCompanyMigration1.resources

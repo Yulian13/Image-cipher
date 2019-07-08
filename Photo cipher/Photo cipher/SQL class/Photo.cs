@@ -21,5 +21,7 @@ namespace Photo_cipher
 
         public int? CompositionId { get; set; }
         public Composition Composition { get; set; }
+
+        public Photo() { }
     }
 }

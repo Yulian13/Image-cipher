@@ -43,8 +43,8 @@ namespace Photo_cipher
             NewImages = new NewImage[composition.NumberPhotos];
             ReadyPhotos = new bool[composition.NumberPhotos];
 
-            ProgressBarView.Maximum     = composition.NumberPhotos;
-            ProgressBarProgress1.Maximum = composition.NumberPhotos;
+            ProgressBarProgress.Maximum     = composition.NumberPhotos;
+            ProgressBarView.Maximum = composition.NumberPhotos;
             backgroundWorker1.RunWorkerAsync(composition);
 
             while (ReadyPhotos[0] != true) { }
@@ -68,17 +68,17 @@ namespace Photo_cipher
         {
             if (close)
                 return; // Crutch
-            LabelProgress1.Text = $"{e.ProgressPercentage}/{NewImages.Length}";
-            ProgressBarProgress1.Value++;
+            LabelProgress.Text = $"{e.ProgressPercentage}/{NewImages.Length}";
+            ProgressBarProgress.Value++;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (close)
                 return; // Crutch
-            ProgressBarProgress1.Visible = false;
-            LabelProgress1.Visible = false;
-            statusStrip1.Visible = false;
+            ProgressBarProgress.Visible = false;
+            LabelProgress.Visible = false;
+            //statusStrip1.Visible = false;
         }
 
         private void buttonForward_Click(object sender, EventArgs e)
@@ -107,14 +107,14 @@ namespace Photo_cipher
         {
             Image image = (originDeshifrovka) ? NewImages[numberPhoto].image :
                     Librari.byteArrayToImage(composition.Photos.ElementAt<Photo>(NumberPhoto).Image);
-            LabelProgress1.Margin = new Padding((int)(toolStrip1.Width * 0.4),3,0,2);
+            LabelView.Margin = new Padding((int)(toolStrip1.Width * 0.4),3,0,2);
             if (NormalZoom)
             {
                 int Width = panel1.Width - 20;
                 int Height = (int)(((double)image.Height / image.Width) * Width);
                 Size newSize = new Size(Width, Height);
                 pictureBox1.Image = new Bitmap(image, newSize);
-                pictureBox1.Size = newSize;
+                pictureBox1.Size = new Size(newSize.Width, newSize.Height+20);
             }
             else
             {
@@ -133,7 +133,7 @@ namespace Photo_cipher
         private void ButtonZoomNormal_Click(object sender, EventArgs e)
         {
             NormalZoom = !NormalZoom;
-            pictureBox1.SizeMode = (NormalZoom) ? PictureBoxSizeMode.CenterImage : PictureBoxSizeMode.Zoom;
+            pictureBox1.SizeMode = (NormalZoom) ? PictureBoxSizeMode.Normal : PictureBoxSizeMode.Zoom;
             pictureBox1.Image = NewImages[NumberPhoto].image;
             ButtonZoomNormal.Text = (NormalZoom) ? "Zoom" : "Normal" ;
             pictureBox1_SizeChanged(null,null);

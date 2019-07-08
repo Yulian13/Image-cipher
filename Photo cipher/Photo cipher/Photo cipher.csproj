@@ -81,6 +81,10 @@
     <Compile Include="Migrations\201907010855209_AddCompanyMigration.Designer.cs">
       <DependentUpon>201907010855209_AddCompanyMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907081358344_AddCompanyMigration1.cs" />
+    <Compile Include="Migrations\201907081358344_AddCompanyMigration1.Designer.cs">
+      <DependentUpon>201907081358344_AddCompanyMigration1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NewImage.cs" />
     <Compile Include="Program.cs" />
@@ -88,6 +92,7 @@
     <Compile Include="SQL class\Composition.cs" />
     <Compile Include="SQL class\Photo.cs" />
     <Compile Include="SQL class\PhotoContext.cs" />
+    <Compile Include="SQL class\PhotoContextFactory.cs" />
     <Compile Include="Watching.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907010855209_AddCompanyMigration.resx">
       <DependentUpon>201907010855209_AddCompanyMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081358344_AddCompanyMigration1.resx">
+      <DependentUpon>201907081358344_AddCompanyMigration1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
