@@ -66,19 +66,18 @@ namespace Photo_cipher
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (close)
-                return; // Crutch
+            if (close) return; // Crutch
+
             LabelProgress.Text = $"{e.ProgressPercentage}/{NewImages.Length}";
             ProgressBarProgress.Value++;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (close)
-                return; // Crutch
+            if (close) return; // Crutch
+
             ProgressBarProgress.Visible = false;
             LabelProgress.Visible = false;
-            //statusStrip1.Visible = false;
         }
 
         private void buttonForward_Click(object sender, EventArgs e)
@@ -114,7 +113,7 @@ namespace Photo_cipher
                 int Height = (int)(((double)image.Height / image.Width) * Width);
                 Size newSize = new Size(Width, Height);
                 pictureBox1.Image = new Bitmap(image, newSize);
-                pictureBox1.Size = new Size(newSize.Width, newSize.Height+20);
+                pictureBox1.Size = new Size(newSize.Width, newSize.Height+statusStrip1.Height);
             }
             else
             {

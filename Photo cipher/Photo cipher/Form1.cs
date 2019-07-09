@@ -156,10 +156,6 @@ namespace Photo_cipher
         private void backgroundWorkerAdding_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
-            progressBar1.Value = 0;
-            progressBar1.Visible = false;
-            buttonCancel.Visible = false;
-
             if (e.Error != null)
             {
                 MessageBox.Show("Error!: " + e.Error.Message);
@@ -170,17 +166,21 @@ namespace Photo_cipher
                     db.Photos.Add(photo);
                 db.Compositions.Add(composition);
 
-                foreach(var prov in db.Compositions)
-                {
-                    if (prov.Name == "Crutch")
-                        db.Compositions.Remove(prov);
-                    break;
-                } // Crutch
+                db.SaveChanges();
+
+                composition.IdFirstPhoto = composition.Photos.First().Id;
+
+                if (db.Compositions.First().Name == "Crutch")
+                    db.Compositions.Remove(db.Compositions.First());// Crutch
 
                 db.SaveChanges();
 
                 MessageBox.Show("Composition have been added");
             }
+
+            progressBar1.Value = 0;
+            progressBar1.Visible = false;
+            buttonCancel.Visible = false;
             buttonAdd.Enabled = true;
             composition = null;
         }
@@ -256,13 +256,12 @@ namespace Photo_cipher
             if (id < 0) return;
 
             Composition composition = db.Compositions.Find(id);
+            db.Photos.RemoveRange(composition.Photos);
             db.Compositions.Remove(composition);
-            foreach (var photo in db.Photos)
-                if (photo.CompositionId == null)
-                    db.Photos.Remove(photo);
 
             db.SaveChanges();
 
+            dataGridView1_SelectionChanged(null,null);
             MessageBox.Show("Composition have been Deleted");
         }
 
@@ -289,6 +288,8 @@ namespace Photo_cipher
 
             var SelectedCompositions = dataGridView1.SelectedRows.Cast<DataGridViewRow>().Select(i => i.Index).ToList();
             int NameId = 0;
+            string path = DirectoryPath.SelectedPath +
+                ((DirectoryPath.SelectedPath.EndsWith("\\")) ? "CompositionImage" : "\\CompositionImage");
             foreach (var index in SelectedCompositions)
             {
                 if (dataGridView1.SelectedRows.Count < 1)
@@ -298,8 +299,6 @@ namespace Photo_cipher
                 if (converted == false)
                     return;
 
-                string path = DirectoryPath.SelectedPath +
-                    ((DirectoryPath.SelectedPath.EndsWith("\\")) ? "CompositionImage" : "\\CompositionImage");
                 Directory.CreateDirectory(path);
 
                 while (true)
@@ -332,6 +331,18 @@ namespace Photo_cipher
 
         private void buttonImport_Click(object sender, EventArgs e)
         {
+            FolderBrowserDialog DirectoryPath = new FolderBrowserDialog();
+            if (DirectoryPath.ShowDialog() != DialogResult.OK)
+                return;
+
+            string path = DirectoryPath.SelectedPath +
+                ((DirectoryPath.SelectedPath.EndsWith("\\")) ? "CompositionImage" : "\\CompositionImage");
+
+            if (!Directory.Exists(path))
+            {
+                MessageBox.Show("There is folder is \"CompositionImage\"");
+                return;
+            }
 
         }
 
