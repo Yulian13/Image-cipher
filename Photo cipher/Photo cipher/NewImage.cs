@@ -53,10 +53,12 @@ namespace Photo_cipher
             LockBitmap Image = new LockBitmap(image);
             Image.LockBits();
 
-            char[] MovesRight = Librari.DeShifrovka(rightKey,Key).ToCharArray();
+            string s = Librari.DeShifrovka(rightKey, Key);
+            int h = s.Length;
+            char[] MovesRight = s.ToCharArray();
             for (int i = 0; i < Height; i++)
             {
-                int Move = Width - MovesRight[i];
+                int Move = Width - MovesRight[(i>MovesRight.Length-1) ? MovesRight.Length-1 : i];
                 Color[] NewPixels = new Color[Width];
                 for (int j = 0; j < Width; j++)
                     NewPixels[j] = Image.GetPixel(j, i);

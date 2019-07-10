@@ -17,11 +17,12 @@ namespace Photo_cipher
     {
         static PhotoContext db;
         static Composition composition;
-        List<Photo> FirstPhotos = null;
 
         float RatioSize;
 
         string Key;
+        const string NameFolderCompositions = "CompositionImage";
+        const string NameFolderKeys         = "Keys";
 
         int NowId {
             get
@@ -111,9 +112,10 @@ namespace Photo_cipher
                 MessageBox.Show(ex.Message);
                 return;
             }
+            if (Images.Length == 0) throw new Exception("there isn't images");
 
             string[] Files = FilePath.Split('\\');
-            string DirectoryName = Librari.Shifrovka(Files[Files.Length - 1], Key);
+            string DirectoryName = Librari.Shifrovka(Files.Last(), Key);
             Files = null;
 
             Random rndm = new Random();
@@ -286,10 +288,10 @@ namespace Photo_cipher
             if (DirectoryPath.ShowDialog() != DialogResult.OK)
                 return;
 
-            var SelectedCompositions = dataGridView1.SelectedRows.Cast<DataGridViewRow>().Select(i => i.Index).ToList();
+            List<int> SelectedCompositions = dataGridView1.SelectedRows.Cast<DataGridViewRow>().Select(i => i.Index).ToList();
             int NameId = 0;
             string path = DirectoryPath.SelectedPath +
-                ((DirectoryPath.SelectedPath.EndsWith("\\")) ? "CompositionImage" : "\\CompositionImage");
+                ((DirectoryPath.SelectedPath.EndsWith("\\")) ? NameFolderCompositions : $"\\{NameFolderCompositions}");
             foreach (var index in SelectedCompositions)
             {
                 if (dataGridView1.SelectedRows.Count < 1)
@@ -308,7 +310,7 @@ namespace Photo_cipher
                     else
                         break;
                 }
-                Directory.CreateDirectory(path + $"\\{NameId}\\Keys");
+                Directory.CreateDirectory(path + $"\\{NameId}\\{NameFolderKeys}");
 
                 string FilePath = path + $"\\{NameId}";
 
@@ -320,13 +322,13 @@ namespace Photo_cipher
                 {
                     Image image = Librari.byteArrayToImage(photo.Image);
                     image.Save(FilePath + $"\\{namberImage}image.jpg");
-                    File.WriteAllText(FilePath + $"\\Keys\\{namberImage}Key.txt", photo.RightKey);
+                    File.WriteAllText(FilePath + $"\\{NameFolderKeys}\\{namberImage}Key.txt", photo.RightKey);
                     namberImage++;
                 }
 
             }
-
-            MessageBox.Show("Composition have been Exported");
+            string massage = ((SelectedCompositions.Count > 1) ? "Compositions" : "Composition");
+            MessageBox.Show($"{massage} have been Exported");
         }
 
         private void buttonImport_Click(object sender, EventArgs e)
@@ -336,14 +338,44 @@ namespace Photo_cipher
                 return;
 
             string path = DirectoryPath.SelectedPath +
-                ((DirectoryPath.SelectedPath.EndsWith("\\")) ? "CompositionImage" : "\\CompositionImage");
+                ((DirectoryPath.SelectedPath.EndsWith("\\")) ? NameFolderCompositions : $"\\{NameFolderCompositions}");
 
             if (!Directory.Exists(path))
             {
-                MessageBox.Show("There is folder is \"CompositionImage\"");
+                MessageBox.Show($"There is no folder is \"{NameFolderCompositions}\"");
                 return;
             }
 
+            ImportCompositions importer = new ImportCompositions(path,Key,NameFolderKeys);
+            DialogResult result = importer.ShowDialog();
+            if (result != DialogResult.OK || importer.indexes.Count==0) return;
+
+            foreach(int index in importer.indexes)
+            {
+                string[] NumberPhoto = Directory.GetFiles(path + $"\\{index}", "*jpg", SearchOption.TopDirectoryOnly);
+                Composition composition = new Composition() {
+                    Name = new StreamReader(path + $"\\{index}\\Text.txt").ReadToEnd(),
+                    NumberPhotos = NumberPhoto.Length,
+                };
+
+                for(int i = 0; i<NumberPhoto.Length; i++)
+                {
+                    string pathRightKey = path + $"\\{index}\\{NameFolderKeys}\\{i}Key.txt";
+                    Photo photo = new Photo()
+                    {
+                        Image = Librari.imageToByteArray(new Bitmap(path + $"\\{index}\\{i}image.jpg")),
+                        RightKey = new StreamReader(pathRightKey).ReadToEnd(),
+                        Composition = composition
+                    };
+                    db.Photos.Add(photo);
+                }
+                db.Compositions.Add(composition);
+                db.SaveChanges();
+                composition.IdFirstPhoto = composition.Photos.First().Id;                
+            }
+
+            db.SaveChanges();
+            MessageBox.Show("All is ready");
         }
 
         private void Form1_Load(object sender, EventArgs e)

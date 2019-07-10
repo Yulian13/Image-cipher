@@ -71,6 +71,12 @@
     <Compile Include="GetKey.Designer.cs">
       <DependentUpon>GetKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImportCompositions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportCompositions.Designer.cs">
+      <DependentUpon>ImportCompositions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Librari.cs" />
     <Compile Include="LockBitmap.cs" />
     <Compile Include="Migrations\201906271343235_InitialCreate.cs" />
@@ -104,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GetKey.resx">
       <DependentUpon>GetKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportCompositions.resx">
+      <DependentUpon>ImportCompositions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906271343235_InitialCreate.resx">
       <DependentUpon>201906271343235_InitialCreate.cs</DependentUpon>

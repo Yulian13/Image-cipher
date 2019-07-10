@@ -40,11 +40,11 @@ namespace Photo_cipher
             this.composition = composition;
             this.Key = Key;
             this.Text = Librari.DeShifrovka(composition.Name, Key);
-            NewImages = new NewImage[composition.NumberPhotos];
-            ReadyPhotos = new bool[composition.NumberPhotos];
+            NewImages = new NewImage[composition.Photos.Count];
+            ReadyPhotos = new bool[composition.Photos.Count];
 
-            ProgressBarProgress.Maximum     = composition.NumberPhotos;
-            ProgressBarView.Maximum = composition.NumberPhotos;
+            ProgressBarProgress.Maximum = ReadyPhotos.Length;
+            ProgressBarView.Maximum = ReadyPhotos.Length;
             backgroundWorker1.RunWorkerAsync(composition);
 
             while (ReadyPhotos[0] != true) { }
@@ -53,11 +53,20 @@ namespace Photo_cipher
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            Bitmap error = new Bitmap(pictureBox1.ErrorImage);
             int i = 0;
             foreach(Photo photo in (e.Argument as Composition).Photos)
             {
-                NewImages[i] = new NewImage(Librari.byteArrayToImage(photo.Image));
-                NewImages[i].DeShifrovkaImage(Key,photo.RightKey);
+                if (close) return; // Crutch
+                try
+                {
+                    NewImages[i] = new NewImage(Librari.byteArrayToImage(photo.Image));
+                    NewImages[i].DeShifrovkaImage(Key,photo.RightKey);
+                }
+                catch (Exception)
+                {
+                    NewImages[i].image = error;
+                }
                 ReadyPhotos[i] = true;
                 backgroundWorker1.ReportProgress(++i);
             }
