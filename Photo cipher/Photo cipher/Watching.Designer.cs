@@ -133,6 +133,7 @@
             this.LabelTest.Name = "LabelTest";
             this.LabelTest.Size = new System.Drawing.Size(41, 22);
             this.LabelTest.Text = "Label1";
+            this.LabelTest.Visible = false;
             // 
             // backgroundWorker1
             // 

@@ -18,17 +18,21 @@ namespace Photo_cipher
 
         Random rndm;
 
-        public NewImage(Image image, Random random = null)
+        public NewImage(Image image, Random random = null, string rightKey = "")
         {
             this.image = new Bitmap(image);
-            RightKey = "";
+            RightKey = rightKey;
             Width = image.Width;
             Height = image.Height;
-            rndm = (random != null) ? random : new Random();
+            rndm = random;
         }
 
-        public void ShifrovkaImage()
+        public NewImage(Photo photo) : this(Librari.byteArrayToImage(photo.Image), null, photo.RightKey) { }
+
+        public Image ShifrovkaImage()
         {
+            if (rndm == null) rndm = new Random();
+
             LockBitmap Image = new LockBitmap(image);
             Image.LockBits();
 
@@ -46,19 +50,22 @@ namespace Photo_cipher
 
             Image.UnlockBits();
 
+            return image;
         }
 
-        public void DeShifrovkaImage(string Key, string rightKey)
+        public Image DeShifrovkaImage(string Key)
         {
+            if (rndm == null) rndm = new Random();
+
             LockBitmap Image = new LockBitmap(image);
             Image.LockBits();
 
-            string s = Librari.DeShifrovka(rightKey, Key);
+            string s = Librari.DeShifrovka(RightKey, Key);
             int h = s.Length;
             char[] MovesRight = s.ToCharArray();
             for (int i = 0; i < Height; i++)
             {
-                int Move = Width - MovesRight[(i>MovesRight.Length-1) ? MovesRight.Length-1 : i];
+                int Move = Width - MovesRight[(i > MovesRight.Length - 1) ? MovesRight.Length - 1 : i];
                 Color[] NewPixels = new Color[Width];
                 for (int j = 0; j < Width; j++)
                     NewPixels[j] = Image.GetPixel(j, i);
@@ -68,6 +75,7 @@ namespace Photo_cipher
 
             Image.UnlockBits();
 
+            return image;
         }
     }
 }

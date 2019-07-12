@@ -13,7 +13,7 @@ namespace Photo_cipher
     public partial class Watching : Form
     {
         Composition composition;
-        static NewImage[] NewImages;
+        static Image[] NewImages;
         static bool[] ReadyPhotos;
         bool close = false;
 
@@ -40,7 +40,7 @@ namespace Photo_cipher
             this.composition = composition;
             this.Key = Key;
             this.Text = Librari.DeShifrovka(composition.Name, Key);
-            NewImages = new NewImage[composition.Photos.Count];
+            NewImages = new Image[composition.Photos.Count];
             ReadyPhotos = new bool[composition.Photos.Count];
 
             ProgressBarProgress.Maximum = ReadyPhotos.Length;
@@ -53,19 +53,18 @@ namespace Photo_cipher
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            Bitmap error = new Bitmap(pictureBox1.ErrorImage);
+            Image error = pictureBox1.ErrorImage;
             int i = 0;
             foreach(Photo photo in (e.Argument as Composition).Photos)
             {
                 if (close) return; // Crutch
                 try
                 {
-                    NewImages[i] = new NewImage(Librari.byteArrayToImage(photo.Image));
-                    NewImages[i].DeShifrovkaImage(Key,photo.RightKey);
+                    NewImages[i] = new NewImage(photo).DeShifrovkaImage(Key);
                 }
                 catch (Exception)
                 {
-                    NewImages[i].image = error;
+                    NewImages[i] = error;
                 }
                 ReadyPhotos[i] = true;
                 backgroundWorker1.ReportProgress(++i);
@@ -105,15 +104,22 @@ namespace Photo_cipher
 
         private void Watching_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Location.X < pictureBox1.Width / 2)
+            if (e.Button == MouseButtons.XButton1)
+                buttonForward_Click(null,null);
+            else if (e.Button == MouseButtons.XButton2)
                 buttonBack_Click(null, null);
-            else
-                buttonForward_Click(null, null);
+            else if(e.Button == MouseButtons.Left)
+            {
+                if (e.Location.X < pictureBox1.Width / 2)
+                    buttonBack_Click(null, null);
+                else
+                    buttonForward_Click(null, null);
+            }
         }
 
         private void pictureBox1_SizeChanged(object sender, EventArgs e)
         {
-            Image image = (originDeshifrovka) ? NewImages[numberPhoto].image :
+            Image image = (originDeshifrovka) ? NewImages[numberPhoto] :
                     Librari.byteArrayToImage(composition.Photos.ElementAt<Photo>(NumberPhoto).Image);
             LabelView.Margin = new Padding((int)(toolStrip1.Width * 0.4),3,0,2);
             if (NormalZoom)
@@ -142,7 +148,7 @@ namespace Photo_cipher
         {
             NormalZoom = !NormalZoom;
             pictureBox1.SizeMode = (NormalZoom) ? PictureBoxSizeMode.Normal : PictureBoxSizeMode.Zoom;
-            pictureBox1.Image = NewImages[NumberPhoto].image;
+            pictureBox1.Image = NewImages[NumberPhoto];
             ButtonZoomNormal.Text = (NormalZoom) ? "Zoom" : "Normal" ;
             pictureBox1_SizeChanged(null,null);
         }

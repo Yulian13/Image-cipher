@@ -219,16 +219,15 @@ namespace Photo_cipher
                 Composition composition = db.Compositions.Find(id);
                 labelNameComposistion.Text = Librari.DeShifrovka(composition.Name, Key);
                 Photo photo = db.Photos.Find(composition.IdFirstPhoto);
-                NewImage newImage = new NewImage(new Bitmap(Librari.byteArrayToImage(photo.Image)), null);
-                newImage.DeShifrovkaImage(Key, photo.RightKey);
+                Image newImage = new NewImage(photo).DeShifrovkaImage(Key);
 
-                float newRatioSize = (float)newImage.image.Width / newImage.image.Height;
+                float newRatioSize = (float)newImage.Width / newImage.Height;
                 pictureBox1.Size = new Size(250,400);
                 if (RatioSize < newRatioSize)
                     pictureBox1.Height = (int)(pictureBox1.Height * RatioSize / newRatioSize);
                 else
                     pictureBox1.Width = (int)(pictureBox1.Width / RatioSize * newRatioSize);
-                pictureBox1.Image = new Bitmap(newImage.image, pictureBox1.Size);
+                pictureBox1.Image = new Bitmap(newImage, pictureBox1.Size);
                 RightKey = true;
             }
             catch(System.Security.Cryptography.CryptographicException) {

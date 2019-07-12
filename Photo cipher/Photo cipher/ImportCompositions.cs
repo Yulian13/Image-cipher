@@ -73,12 +73,11 @@ namespace Photo_cipher
 
             int index = dataGridView1.SelectedRows[0].Index;
 
-            NewImage newImage = new NewImage((Image)dataGridView1[4,index].Value);
             string RightKey = (string)dataGridView1[5, index].Value;
+            Image newImage = new NewImage((Image)dataGridView1[4,index].Value,rightKey: RightKey).DeShifrovkaImage(Key);
             try
             {
-                newImage.DeShifrovkaImage(Key, RightKey);
-                pictureBox1.Image = newImage.image;
+                pictureBox1.Image = newImage;
             }
             catch (Exception)
             {
