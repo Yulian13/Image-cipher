@@ -11,9 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Photo_cipher
+namespace Photo_cipher.Forms
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         static PhotoContext db;
         static Composition composition;
@@ -49,18 +49,19 @@ namespace Photo_cipher
 
                 rightKey = value;
 
-                buttonOpen.Enabled              = rightKey;
+                buttonOpen.Enabled = rightKey;
                 exportToolStripMenuItem.Enabled = rightKey;
+                changeCompositionToolStripMenuItem.Enabled = rightKey;
             }
         }
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
 
             RatioSize = (float)pictureBox1.Width / pictureBox1.Height;
 
-            db = new PhotoContext(); //@"Data Source=WIN-TUCQMTTP77C;Initial Catalog=Composition;Integrated Security=True;AttachDbFileName=D:\Anime\DataBase\Testing.mdf"
+            db = new PhotoContext(@"Data Source=WIN-TUCQMTTP77C;Initial Catalog=Composition;Integrated Security=True;AttachDbFileName=D:\Anime\DataBase\Composition.mdf");
             db.Compositions.Load();
             if(db.Compositions.Count() == 0)
                 db.Compositions.Add(new Composition() {Name = "Crutch", NumberPhotos = 12 });// Crutch
@@ -203,7 +204,7 @@ namespace Photo_cipher
         {
             GetKey Key = new GetKey();
             Key.ShowDialog();
-            this.Key = Key.maskedTextBox1.Text;
+            this.Key = new string(Key.maskedTextBox1.Text.ToCharArray());
 
             if(sender != null & e != null)
                 dataGridView1_SelectionChanged(null, null);
@@ -375,6 +376,20 @@ namespace Photo_cipher
 
             db.SaveChanges();
             MessageBox.Show("All is ready");
+        }
+
+        private void changeCompositionsNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int id = NowId;
+            if (id < 0) return;
+
+            Composition composition = db.Compositions.Find(id);
+            EnterString enter = new EnterString(Librari.DeShifrovka(composition.Name, Key));
+
+            if (enter.ShowDialog() != DialogResult.OK) return;
+
+            composition.Name = Librari.Shifrovka(enter.GetName, Key);
+            labelNameComposistion.Text = enter.GetName;
         }
 
         private void Form1_Load(object sender, EventArgs e)

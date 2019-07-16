@@ -54,27 +54,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompositionDataSet.cs">
+      <DependentUpon>CompositionDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="CompositionDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CompositionDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\EnterString.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\EnterString.Designer.cs">
+      <DependentUpon>EnterString.cs</DependentUpon>
     </Compile>
-    <Compile Include="GetKey.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GetKey.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GetKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GetKey.Designer.cs">
       <DependentUpon>GetKey.cs</DependentUpon>
     </Compile>
-    <Compile Include="ImportCompositions.cs">
+    <Compile Include="Forms\ImportCompositions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImportCompositions.Designer.cs">
+    <Compile Include="Forms\ImportCompositions.Designer.cs">
       <DependentUpon>ImportCompositions.cs</DependentUpon>
     </Compile>
     <Compile Include="Librari.cs" />
@@ -99,19 +108,19 @@
     <Compile Include="SQL class\Photo.cs" />
     <Compile Include="SQL class\PhotoContext.cs" />
     <Compile Include="SQL class\PhotoContextFactory.cs" />
-    <Compile Include="Watching.cs">
+    <Compile Include="Forms\Watching.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Watching.Designer.cs">
+    <Compile Include="Forms\Watching.Designer.cs">
       <DependentUpon>Watching.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GetKey.resx">
+    <EmbeddedResource Include="Forms\GetKey.resx">
       <DependentUpon>GetKey.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ImportCompositions.resx">
+    <EmbeddedResource Include="Forms\ImportCompositions.resx">
       <DependentUpon>ImportCompositions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906271343235_InitialCreate.resx">
@@ -132,7 +141,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Watching.resx">
+    <EmbeddedResource Include="Forms\Watching.resx">
       <DependentUpon>Watching.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="CompositionDataSet.xsc">

@@ -25,16 +25,16 @@ C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Debug\E
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Debug\EntityFramework.xml
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.csprojAssemblyReference.cache
-C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Form1.resources
-C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.GetKey.resources
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Migrations.InitialCreate.resources
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Migrations.AddCompanyMigration.resources
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Properties.Resources.resources
-C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Watching.resources
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.csproj.GenerateResource.cache
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.csproj.CoreCompileInputs.cache
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.csproj.CopyComplete
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.exe
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.pdb
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Migrations.AddCompanyMigration1.resources
-C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.ImportCompositions.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Forms.GetKey.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Forms.ImportCompositions.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Forms.Watching.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Forms.MainForm.resources

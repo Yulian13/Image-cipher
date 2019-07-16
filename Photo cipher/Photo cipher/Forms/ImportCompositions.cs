@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace Photo_cipher
+namespace Photo_cipher.Forms
 {
     public partial class ImportCompositions : Form
     {

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Photo_cipher
+namespace Photo_cipher.Forms
 {
     public partial class Watching : Form
     {
-        Composition composition;
+        static Image[] originImage;
         static Image[] NewImages;
         static bool[] ReadyPhotos;
         bool close = false;
@@ -37,11 +37,11 @@ namespace Photo_cipher
         {
             InitializeComponent();
 
-            this.composition = composition;
-            this.Key = Key;
-            this.Text = Librari.DeShifrovka(composition.Name, Key);
-            NewImages = new Image[composition.Photos.Count];
-            ReadyPhotos = new bool[composition.Photos.Count];
+            this.Key = new string(Key.ToCharArray());
+            this.Text = Librari.DeShifrovka(composition.Name, this.Key);
+            originImage = new Image[composition.Photos.Count];
+            NewImages   = new Image[composition.Photos.Count];
+            ReadyPhotos = new bool [composition.Photos.Count];
 
             ProgressBarProgress.Maximum = ReadyPhotos.Length;
             ProgressBarView.Maximum = ReadyPhotos.Length;
@@ -61,6 +61,7 @@ namespace Photo_cipher
                 try
                 {
                     NewImages[i] = new NewImage(photo).DeShifrovkaImage(Key);
+                    originImage[i] = Librari.byteArrayToImage(photo.Image);
                 }
                 catch (Exception)
                 {
@@ -91,7 +92,7 @@ namespace Photo_cipher
         private void buttonForward_Click(object sender, EventArgs e)
         {
             panel1.VerticalScroll.Value = 0;
-            if (NumberPhoto < composition.NumberPhotos-1 && ReadyPhotos[NumberPhoto+1] == true)
+            if (NumberPhoto < NewImages.Length-1 && ReadyPhotos[NumberPhoto+1] == true)
                 NumberPhoto++;
         }
 
@@ -120,7 +121,7 @@ namespace Photo_cipher
         private void pictureBox1_SizeChanged(object sender, EventArgs e)
         {
             Image image = (originDeshifrovka) ? NewImages[numberPhoto] :
-                    Librari.byteArrayToImage(composition.Photos.ElementAt<Photo>(NumberPhoto).Image);
+                    originImage[numberPhoto];
             LabelView.Margin = new Padding((int)(toolStrip1.Width * 0.4),3,0,2);
             if (NormalZoom)
             {
@@ -153,6 +154,14 @@ namespace Photo_cipher
             pictureBox1_SizeChanged(null,null);
         }
 
-        private void Watching_FormClosing(object sender, FormClosingEventArgs e) => close = true;
+        private void Watching_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            close = true;
+            for(int i = 0; i < NewImages.Length; i++)
+            {
+                NewImages[i].Dispose();
+                originImage[i].Dispose();
+            }
+        }
     }
 }

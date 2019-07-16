@@ -1,6 +1,6 @@
-﻿namespace Photo_cipher
+﻿namespace Photo_cipher.Forms
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,13 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.ButtonChangeKey = new System.Windows.Forms.ToolStripButton();
-            this.ButtonReset = new System.Windows.Forms.ToolStripButton();
             this.DownButtonMigration = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +50,12 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.compositionsTableAdapter = new Photo_cipher.CompositionDataSetTableAdapters.CompositionsTableAdapter();
+            this.DropDownInstrument = new System.Windows.Forms.ToolStripDropDownButton();
+            this.keyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeCompositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeCompositionsNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -92,34 +96,13 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ButtonChangeKey,
-            this.ButtonReset,
+            this.DropDownInstrument,
             this.DownButtonMigration});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(526, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // ButtonChangeKey
-            // 
-            this.ButtonChangeKey.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ButtonChangeKey.Image = ((System.Drawing.Image)(resources.GetObject("ButtonChangeKey.Image")));
-            this.ButtonChangeKey.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonChangeKey.Name = "ButtonChangeKey";
-            this.ButtonChangeKey.Size = new System.Drawing.Size(74, 22);
-            this.ButtonChangeKey.Text = "Change Key";
-            this.ButtonChangeKey.Click += new System.EventHandler(this.toolStripButtonChangeKey_Click);
-            // 
-            // ButtonReset
-            // 
-            this.ButtonReset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ButtonReset.Image = ((System.Drawing.Image)(resources.GetObject("ButtonReset.Image")));
-            this.ButtonReset.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonReset.Name = "ButtonReset";
-            this.ButtonReset.Size = new System.Drawing.Size(39, 22);
-            this.ButtonReset.Text = "Reset";
-            this.ButtonReset.Click += new System.EventHandler(this.ButtonReset_Click);
             // 
             // DownButtonMigration
             // 
@@ -136,14 +119,14 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.buttonExport_Click);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importToolStripMenuItem.Text = "Import";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.buttonImport_Click);
             // 
@@ -254,7 +237,57 @@
             // 
             this.compositionsTableAdapter.ClearBeforeFill = true;
             // 
-            // Form1
+            // DropDownInstrument
+            // 
+            this.DropDownInstrument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.DropDownInstrument.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.keyToolStripMenuItem,
+            this.changeCompositionToolStripMenuItem});
+            this.DropDownInstrument.Image = ((System.Drawing.Image)(resources.GetObject("DropDownInstrument.Image")));
+            this.DropDownInstrument.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DropDownInstrument.Name = "DropDownInstrument";
+            this.DropDownInstrument.Size = new System.Drawing.Size(83, 22);
+            this.DropDownInstrument.Text = "Instruments";
+            // 
+            // keyToolStripMenuItem
+            // 
+            this.keyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeKeyToolStripMenuItem,
+            this.resetToolStripMenuItem});
+            this.keyToolStripMenuItem.Name = "keyToolStripMenuItem";
+            this.keyToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.keyToolStripMenuItem.Text = "Key";
+            // 
+            // changeKeyToolStripMenuItem
+            // 
+            this.changeKeyToolStripMenuItem.Name = "changeKeyToolStripMenuItem";
+            this.changeKeyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changeKeyToolStripMenuItem.Text = "Change Key";
+            this.changeKeyToolStripMenuItem.Click += new System.EventHandler(this.toolStripButtonChangeKey_Click);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetToolStripMenuItem.Text = "Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.ButtonReset_Click);
+            // 
+            // changeCompositionToolStripMenuItem
+            // 
+            this.changeCompositionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeCompositionsNameToolStripMenuItem});
+            this.changeCompositionToolStripMenuItem.Name = "changeCompositionToolStripMenuItem";
+            this.changeCompositionToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.changeCompositionToolStripMenuItem.Text = "Change composition";
+            // 
+            // changeCompositionsNameToolStripMenuItem
+            // 
+            this.changeCompositionsNameToolStripMenuItem.Name = "changeCompositionsNameToolStripMenuItem";
+            this.changeCompositionsNameToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.changeCompositionsNameToolStripMenuItem.Text = "Change composition\'s name";
+            this.changeCompositionsNameToolStripMenuItem.Click += new System.EventHandler(this.changeCompositionsNameToolStripMenuItem_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -270,7 +303,7 @@
             this.Controls.Add(this.buttonAdd);
             this.MaximumSize = new System.Drawing.Size(542, 504);
             this.MinimumSize = new System.Drawing.Size(542, 504);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -290,7 +323,6 @@
         private System.Windows.Forms.Button buttonOpen;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton ButtonChangeKey;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Label labelNameComposistion;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -301,13 +333,18 @@
         private System.ComponentModel.BackgroundWorker backgroundWorkerAdding;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.ToolStripButton ButtonReset;
         private System.Windows.Forms.ToolStripDropDownButton DownButtonMigration;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberPhotosDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolStripDropDownButton DropDownInstrument;
+        private System.Windows.Forms.ToolStripMenuItem keyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeKeyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeCompositionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeCompositionsNameToolStripMenuItem;
     }
 }
 

@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Photo_cipher
+namespace Photo_cipher.Forms
 {
-    public partial class GetKey : Form
+    partial class GetKey : Form
     {
         public GetKey()
         {
@@ -20,7 +20,7 @@ namespace Photo_cipher
         private void buttonOK_Click(object sender, EventArgs e)
         {
             if (maskedTextBox1.Text.Length == 4)
-                (sender as Button).DialogResult = DialogResult.OK;
+                this.DialogResult = DialogResult.OK;
             else
                 label1.ForeColor = Color.Red;
         }

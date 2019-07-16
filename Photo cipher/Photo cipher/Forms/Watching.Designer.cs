@@ -1,4 +1,4 @@
-﻿namespace Photo_cipher
+﻿namespace Photo_cipher.Forms
 {
     partial class Watching
     {
