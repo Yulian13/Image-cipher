@@ -79,9 +79,9 @@ namespace Photo_cipher.Forms
             FolderBrowserDialog FilePath = new FolderBrowserDialog();
             if (FilePath.ShowDialog() != DialogResult.OK)
                 return;
-            buttonAdd.Enabled = false;
-
             backgroundWorkerAdding.RunWorkerAsync(FilePath.SelectedPath);
+            buttonAdd.Enabled = false;
+            exportToolStripMenuItem.Enabled = false;
         }
 
         private void backgroundWorkerAdding_DoWork(object sender, DoWorkEventArgs e)
@@ -185,8 +185,11 @@ namespace Photo_cipher.Forms
             progressBar1.Visible = false;
             buttonCancel.Visible = false;
             buttonAdd.Enabled = true;
+            exportToolStripMenuItem.Enabled = true;
             composition = null;
         }
+
+        #endregion
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
@@ -194,11 +197,12 @@ namespace Photo_cipher.Forms
             MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2,
             MessageBoxOptions.DefaultDesktopOnly);
 
-            if(result == DialogResult.Yes) 
+            if(result == DialogResult.Yes)
+            {
                 backgroundWorkerAdding.CancelAsync();
+                backgroundWorkerExport.CancelAsync();
+            }
         }
-
-        #endregion
 
         private void toolStripButtonChangeKey_Click(object sender, EventArgs e)
         {
@@ -282,16 +286,26 @@ namespace Photo_cipher.Forms
             dataGridView1_SelectionChanged(null, null);
         }
 
+        #region Export
+
         private void buttonExport_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog DirectoryPath = new FolderBrowserDialog();
             if (DirectoryPath.ShowDialog() != DialogResult.OK)
                 return;
 
+            backgroundWorkerExport.RunWorkerAsync(DirectoryPath.SelectedPath);
+            buttonAdd.Enabled = false;
+            exportToolStripMenuItem.Enabled = false;
+        }
+
+        private void backgroundWorkerExport_DoWork(object sender, DoWorkEventArgs e)
+        {
             List<int> SelectedCompositions = dataGridView1.SelectedRows.Cast<DataGridViewRow>().Select(i => i.Index).ToList();
             int NameId = 0;
-            string path = DirectoryPath.SelectedPath +
-                ((DirectoryPath.SelectedPath.EndsWith("\\")) ? NameFolderCompositions : $"\\{NameFolderCompositions}");
+            string DirectoryPath = e.Argument.ToString();
+            string path = DirectoryPath +
+                ((DirectoryPath.EndsWith("\\")) ? NameFolderCompositions : $"\\{NameFolderCompositions}");
             foreach (var index in SelectedCompositions)
             {
                 if (dataGridView1.SelectedRows.Count < 1)
@@ -314,22 +328,58 @@ namespace Photo_cipher.Forms
 
                 string FilePath = path + $"\\{NameId}";
 
-                Composition composition = db.Compositions.Find(id);
+                composition = db.Compositions.Find(id);
 
                 File.WriteAllText(FilePath + "\\Text.txt", composition.Name);
                 int namberImage = 0;
-                foreach(Photo photo in composition.Photos)
+
+                if (backgroundWorkerExport.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+
+                foreach (Photo photo in composition.Photos)
                 {
                     Image image = Librari.byteArrayToImage(photo.Image);
                     image.Save(FilePath + $"\\{namberImage}image.jpg");
                     File.WriteAllText(FilePath + $"\\{NameFolderKeys}\\{namberImage}Key.txt", photo.RightKey);
                     namberImage++;
                 }
-
+                backgroundWorkerExport.ReportProgress(SelectedCompositions.Count);
             }
-            string massage = ((SelectedCompositions.Count > 1) ? "Compositions" : "Composition");
-            MessageBox.Show($"{massage} have been Exported");
+            e.Result = SelectedCompositions.Count;
         }
+
+        private void backgroundWorkerExport_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            buttonCancel.Visible = true;
+            progressBar1.Visible = true;
+            progressBar1.Maximum = e.ProgressPercentage;
+            progressBar1.Value++;
+        }
+
+        private void backgroundWorkerExport_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show("Error!: " + e.Error.Message);
+            }
+            else if (e.Cancelled == false)
+            {
+                string message = ((int)e.Result > 1) ? "Compositions" : "Composition";
+                MessageBox.Show($"{message} have been Export");
+            }
+
+            buttonCancel.Visible = false;
+            progressBar1.Visible = false;
+            progressBar1.Value = 0;
+
+            buttonAdd.Enabled = true;
+            exportToolStripMenuItem.Enabled = true;
+        }
+
+        #endregion
 
         private void buttonImport_Click(object sender, EventArgs e)
         {

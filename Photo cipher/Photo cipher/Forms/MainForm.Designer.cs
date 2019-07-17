@@ -34,6 +34,12 @@
             this.buttonOpen = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.DropDownInstrument = new System.Windows.Forms.ToolStripDropDownButton();
+            this.keyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeCompositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeCompositionsNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DownButtonMigration = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,12 +56,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.compositionsTableAdapter = new Photo_cipher.CompositionDataSetTableAdapters.CompositionsTableAdapter();
-            this.DropDownInstrument = new System.Windows.Forms.ToolStripDropDownButton();
-            this.keyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeCompositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeCompositionsNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundWorkerExport = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -104,6 +105,56 @@
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // DropDownInstrument
+            // 
+            this.DropDownInstrument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.DropDownInstrument.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.keyToolStripMenuItem,
+            this.changeCompositionToolStripMenuItem});
+            this.DropDownInstrument.Image = ((System.Drawing.Image)(resources.GetObject("DropDownInstrument.Image")));
+            this.DropDownInstrument.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DropDownInstrument.Name = "DropDownInstrument";
+            this.DropDownInstrument.Size = new System.Drawing.Size(83, 22);
+            this.DropDownInstrument.Text = "Instruments";
+            // 
+            // keyToolStripMenuItem
+            // 
+            this.keyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeKeyToolStripMenuItem,
+            this.resetToolStripMenuItem});
+            this.keyToolStripMenuItem.Name = "keyToolStripMenuItem";
+            this.keyToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.keyToolStripMenuItem.Text = "Key";
+            // 
+            // changeKeyToolStripMenuItem
+            // 
+            this.changeKeyToolStripMenuItem.Name = "changeKeyToolStripMenuItem";
+            this.changeKeyToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.changeKeyToolStripMenuItem.Text = "Change Key";
+            this.changeKeyToolStripMenuItem.Click += new System.EventHandler(this.toolStripButtonChangeKey_Click);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.resetToolStripMenuItem.Text = "Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.ButtonReset_Click);
+            // 
+            // changeCompositionToolStripMenuItem
+            // 
+            this.changeCompositionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeCompositionsNameToolStripMenuItem});
+            this.changeCompositionToolStripMenuItem.Name = "changeCompositionToolStripMenuItem";
+            this.changeCompositionToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.changeCompositionToolStripMenuItem.Text = "Change composition";
+            // 
+            // changeCompositionsNameToolStripMenuItem
+            // 
+            this.changeCompositionsNameToolStripMenuItem.Name = "changeCompositionsNameToolStripMenuItem";
+            this.changeCompositionsNameToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.changeCompositionsNameToolStripMenuItem.Text = "Change composition\'s name";
+            this.changeCompositionsNameToolStripMenuItem.Click += new System.EventHandler(this.changeCompositionsNameToolStripMenuItem_Click);
+            // 
             // DownButtonMigration
             // 
             this.DownButtonMigration.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -119,14 +170,14 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.buttonExport_Click);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.importToolStripMenuItem.Text = "Import";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.buttonImport_Click);
             // 
@@ -167,6 +218,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(248, 312);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            this.dataGridView1.DoubleClick += new System.EventHandler(this.buttonOpen_Click);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -237,55 +289,13 @@
             // 
             this.compositionsTableAdapter.ClearBeforeFill = true;
             // 
-            // DropDownInstrument
+            // backgroundWorkerExport
             // 
-            this.DropDownInstrument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.DropDownInstrument.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.keyToolStripMenuItem,
-            this.changeCompositionToolStripMenuItem});
-            this.DropDownInstrument.Image = ((System.Drawing.Image)(resources.GetObject("DropDownInstrument.Image")));
-            this.DropDownInstrument.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.DropDownInstrument.Name = "DropDownInstrument";
-            this.DropDownInstrument.Size = new System.Drawing.Size(83, 22);
-            this.DropDownInstrument.Text = "Instruments";
-            // 
-            // keyToolStripMenuItem
-            // 
-            this.keyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeKeyToolStripMenuItem,
-            this.resetToolStripMenuItem});
-            this.keyToolStripMenuItem.Name = "keyToolStripMenuItem";
-            this.keyToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.keyToolStripMenuItem.Text = "Key";
-            // 
-            // changeKeyToolStripMenuItem
-            // 
-            this.changeKeyToolStripMenuItem.Name = "changeKeyToolStripMenuItem";
-            this.changeKeyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.changeKeyToolStripMenuItem.Text = "Change Key";
-            this.changeKeyToolStripMenuItem.Click += new System.EventHandler(this.toolStripButtonChangeKey_Click);
-            // 
-            // resetToolStripMenuItem
-            // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.resetToolStripMenuItem.Text = "Reset";
-            this.resetToolStripMenuItem.Click += new System.EventHandler(this.ButtonReset_Click);
-            // 
-            // changeCompositionToolStripMenuItem
-            // 
-            this.changeCompositionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeCompositionsNameToolStripMenuItem});
-            this.changeCompositionToolStripMenuItem.Name = "changeCompositionToolStripMenuItem";
-            this.changeCompositionToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.changeCompositionToolStripMenuItem.Text = "Change composition";
-            // 
-            // changeCompositionsNameToolStripMenuItem
-            // 
-            this.changeCompositionsNameToolStripMenuItem.Name = "changeCompositionsNameToolStripMenuItem";
-            this.changeCompositionsNameToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.changeCompositionsNameToolStripMenuItem.Text = "Change composition\'s name";
-            this.changeCompositionsNameToolStripMenuItem.Click += new System.EventHandler(this.changeCompositionsNameToolStripMenuItem_Click);
+            this.backgroundWorkerExport.WorkerReportsProgress = true;
+            this.backgroundWorkerExport.WorkerSupportsCancellation = true;
+            this.backgroundWorkerExport.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerExport_DoWork);
+            this.backgroundWorkerExport.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerExport_ProgressChanged);
+            this.backgroundWorkerExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerExport_RunWorkerCompleted);
             // 
             // MainForm
             // 
@@ -345,6 +355,7 @@
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeCompositionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeCompositionsNameToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerExport;
     }
 }
 

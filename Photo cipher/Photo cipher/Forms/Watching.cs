@@ -89,14 +89,14 @@ namespace Photo_cipher.Forms
             LabelProgress.Visible = false;
         }
 
-        private void buttonForward_Click(object sender, EventArgs e)
+        private void buttonForward_Click(object sender = null, EventArgs e = null)
         {
             panel1.VerticalScroll.Value = 0;
             if (NumberPhoto < NewImages.Length-1 && ReadyPhotos[NumberPhoto+1] == true)
                 NumberPhoto++;
         }
 
-        private void buttonBack_Click(object sender, EventArgs e)
+        private void buttonBack_Click(object sender = null, EventArgs e = null)
         {
             panel1.VerticalScroll.Value = 0;
             if (NumberPhoto > 0)
@@ -105,17 +105,17 @@ namespace Photo_cipher.Forms
 
         private void Watching_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.XButton1)
-                buttonForward_Click(null,null);
-            else if (e.Button == MouseButtons.XButton2)
-                buttonBack_Click(null, null);
-            else if(e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 if (e.Location.X < pictureBox1.Width / 2)
-                    buttonBack_Click(null, null);
+                    buttonBack_Click();
                 else
-                    buttonForward_Click(null, null);
+                    buttonForward_Click();
             }
+            else if (e.Button == MouseButtons.XButton1)
+                buttonBack_Click();
+            else if (e.Button == MouseButtons.XButton2)
+                buttonForward_Click();
         }
 
         private void pictureBox1_SizeChanged(object sender, EventArgs e)
@@ -159,6 +159,9 @@ namespace Photo_cipher.Forms
             close = true;
             for(int i = 0; i < NewImages.Length; i++)
             {
+                if (NewImages[i] == null)
+                    break;
+
                 NewImages[i].Dispose();
                 originImage[i].Dispose();
             }
