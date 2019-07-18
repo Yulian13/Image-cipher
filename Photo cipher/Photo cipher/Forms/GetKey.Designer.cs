@@ -90,6 +90,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonOK;
-        protected internal System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
     }
 }

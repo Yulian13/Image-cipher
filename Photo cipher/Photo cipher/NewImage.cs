@@ -27,7 +27,7 @@ namespace Photo_cipher
             rndm = random;
         }
 
-        public NewImage(Photo photo) : this(Librari.byteArrayToImage(photo.Image), null, photo.RightKey) { }
+        public NewImage(Photo photo, Random rn = null) : this(Librari.byteArrayToImage(photo.Image), rn, photo.RightKey) { }
 
         public Image ShifrovkaImage()
         {
@@ -36,6 +36,7 @@ namespace Photo_cipher
             LockBitmap Image = new LockBitmap(image);
             Image.LockBits();
 
+            RightKey = "";
             for (int i = 0; i < Height; i++)
             {
                 int Move = rndm.Next(33, Width - 1);
@@ -61,7 +62,6 @@ namespace Photo_cipher
             Image.LockBits();
 
             string s = Librari.DeShifrovka(RightKey, Key);
-            int h = s.Length;
             char[] MovesRight = s.ToCharArray();
             for (int i = 0; i < Height; i++)
             {

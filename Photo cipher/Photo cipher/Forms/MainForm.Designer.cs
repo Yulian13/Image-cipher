@@ -40,8 +40,9 @@
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeCompositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeCompositionsNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeCompositionsKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DownButtonMigration = new System.Windows.Forms.ToolStripDropDownButton();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonExport = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.labelNameComposistion = new System.Windows.Forms.Label();
@@ -57,6 +58,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.compositionsTableAdapter = new Photo_cipher.CompositionDataSetTableAdapters.CompositionsTableAdapter();
             this.backgroundWorkerExport = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerChangeKey = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -143,7 +145,8 @@
             // changeCompositionToolStripMenuItem
             // 
             this.changeCompositionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeCompositionsNameToolStripMenuItem});
+            this.changeCompositionsNameToolStripMenuItem,
+            this.changeCompositionsKeyToolStripMenuItem});
             this.changeCompositionToolStripMenuItem.Name = "changeCompositionToolStripMenuItem";
             this.changeCompositionToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.changeCompositionToolStripMenuItem.Text = "Change composition";
@@ -155,11 +158,18 @@
             this.changeCompositionsNameToolStripMenuItem.Text = "Change composition\'s name";
             this.changeCompositionsNameToolStripMenuItem.Click += new System.EventHandler(this.changeCompositionsNameToolStripMenuItem_Click);
             // 
+            // changeCompositionsKeyToolStripMenuItem
+            // 
+            this.changeCompositionsKeyToolStripMenuItem.Name = "changeCompositionsKeyToolStripMenuItem";
+            this.changeCompositionsKeyToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.changeCompositionsKeyToolStripMenuItem.Text = "Change composition\'s key";
+            this.changeCompositionsKeyToolStripMenuItem.Click += new System.EventHandler(this.changeCompositionsKeyToolStripMenuItem_Click);
+            // 
             // DownButtonMigration
             // 
             this.DownButtonMigration.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.DownButtonMigration.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportToolStripMenuItem,
+            this.buttonExport,
             this.importToolStripMenuItem});
             this.DownButtonMigration.Image = ((System.Drawing.Image)(resources.GetObject("DownButtonMigration.Image")));
             this.DownButtonMigration.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -167,17 +177,17 @@
             this.DownButtonMigration.Size = new System.Drawing.Size(72, 22);
             this.DownButtonMigration.Text = "Migration";
             // 
-            // exportToolStripMenuItem
+            // buttonExport
             // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.exportToolStripMenuItem.Text = "Export";
-            this.exportToolStripMenuItem.Click += new System.EventHandler(this.buttonExport_Click);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(180, 22);
+            this.buttonExport.Text = "Export";
+            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importToolStripMenuItem.Text = "Import";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.buttonImport_Click);
             // 
@@ -297,6 +307,14 @@
             this.backgroundWorkerExport.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerExport_ProgressChanged);
             this.backgroundWorkerExport.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerExport_RunWorkerCompleted);
             // 
+            // backgroundWorkerChangeKey
+            // 
+            this.backgroundWorkerChangeKey.WorkerReportsProgress = true;
+            this.backgroundWorkerChangeKey.WorkerSupportsCancellation = true;
+            this.backgroundWorkerChangeKey.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerChangeKey_DoWork);
+            this.backgroundWorkerChangeKey.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerChangeKey_ProgressChanged);
+            this.backgroundWorkerChangeKey.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerChangeKey_RunWorkerCompleted);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -344,7 +362,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ToolStripDropDownButton DownButtonMigration;
-        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem buttonExport;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
@@ -356,6 +374,8 @@
         private System.Windows.Forms.ToolStripMenuItem changeCompositionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeCompositionsNameToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundWorkerExport;
+        private System.Windows.Forms.ToolStripMenuItem changeCompositionsKeyToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerChangeKey;
     }
 }
 

@@ -12,6 +12,8 @@ namespace Photo_cipher.Forms
 {
     partial class GetKey : Form
     {
+        public string GetText => maskedTextBox1.Text;
+
         public GetKey()
         {
             InitializeComponent();

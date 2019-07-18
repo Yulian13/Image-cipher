@@ -23,6 +23,8 @@ namespace Photo_cipher.Forms
         string Key;
         const string NameFolderCompositions = "CompositionImage";
         const string NameFolderKeys         = "Keys";
+        private const string Connect = @"Data Source=WIN-TUCQMTTP77C;Initial Catalog=Composition;
+                Integrated Security=True;AttachDbFileName=D:\Anime\DataBase\Composition.mdf";
 
         int NowId {
             get
@@ -39,6 +41,25 @@ namespace Photo_cipher.Forms
             }
         }
 
+        bool usedBackgroundWorker = false;
+        public bool UsedBackgroundWorker
+        {
+            get => usedBackgroundWorker;
+            set
+            {
+                usedBackgroundWorker = value;
+
+                progressBar1.Visible = usedBackgroundWorker;
+                buttonCancel.Visible = usedBackgroundWorker;
+
+                buttonAdd.Enabled = !usedBackgroundWorker;
+                buttonExport.Enabled = !usedBackgroundWorker;
+                changeCompositionsKeyToolStripMenuItem.Enabled = !usedBackgroundWorker;
+
+                if (!usedBackgroundWorker) progressBar1.Value = 0;
+            }
+        }
+
         private bool rightKey = true;
         public bool RightKey {
             get => rightKey;
@@ -50,10 +71,11 @@ namespace Photo_cipher.Forms
                 rightKey = value;
 
                 buttonOpen.Enabled = rightKey;
-                exportToolStripMenuItem.Enabled = rightKey;
+                buttonExport.Enabled = rightKey;
                 changeCompositionToolStripMenuItem.Enabled = rightKey;
             }
         }
+
 
         public MainForm()
         {
@@ -61,8 +83,16 @@ namespace Photo_cipher.Forms
 
             RatioSize = (float)pictureBox1.Width / pictureBox1.Height;
 
-            db = new PhotoContext(@"Data Source=WIN-TUCQMTTP77C;Initial Catalog=Composition;Integrated Security=True;AttachDbFileName=D:\Anime\DataBase\Composition.mdf");
-            db.Compositions.Load();
+            try
+            {
+                db = new PhotoContext(Connect);
+                db.Compositions.Load();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex}");
+                return;
+            }
             if(db.Compositions.Count() == 0)
                 db.Compositions.Add(new Composition() {Name = "Crutch", NumberPhotos = 12 });// Crutch
 
@@ -80,12 +110,13 @@ namespace Photo_cipher.Forms
             if (FilePath.ShowDialog() != DialogResult.OK)
                 return;
             backgroundWorkerAdding.RunWorkerAsync(FilePath.SelectedPath);
-            buttonAdd.Enabled = false;
-            exportToolStripMenuItem.Enabled = false;
+            UsedBackgroundWorker = true;
+
         }
 
         private void backgroundWorkerAdding_DoWork(object sender, DoWorkEventArgs e)
         {
+            string Key = new string(this.Key.ToCharArray());
             string FilePath = (string)e.Argument;
             string[] imagesPath = Directory.GetFiles(FilePath, "*jpg", SearchOption.TopDirectoryOnly);
             if (imagesPath.Length == 0)
@@ -150,8 +181,6 @@ namespace Photo_cipher.Forms
 
         private void backgroundWorkerAdding_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar1.Visible = true;
-            buttonCancel.Visible = true;
             progressBar1.Maximum = e.ProgressPercentage * 2;
             progressBar1.Value++;
         }
@@ -181,12 +210,188 @@ namespace Photo_cipher.Forms
                 MessageBox.Show("Composition have been added");
             }
 
-            progressBar1.Value = 0;
-            progressBar1.Visible = false;
-            buttonCancel.Visible = false;
-            buttonAdd.Enabled = true;
-            exportToolStripMenuItem.Enabled = true;
+            UsedBackgroundWorker = false;
+
             composition = null;
+        }
+
+        #endregion
+
+        #region Export
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog DirectoryPath = new FolderBrowserDialog();
+            if (DirectoryPath.ShowDialog() != DialogResult.OK)
+                return;
+
+            backgroundWorkerExport.RunWorkerAsync(DirectoryPath.SelectedPath);
+            UsedBackgroundWorker = true;
+        }
+
+        private void backgroundWorkerExport_DoWork(object sender, DoWorkEventArgs e)
+        {
+            List<int> SelectedCompositions = dataGridView1.SelectedRows.Cast<DataGridViewRow>().Select(i => i.Index).ToList();
+            e.Result = SelectedCompositions.Count;
+            int NameId = 0;
+            string DirectoryPath = e.Argument.ToString();
+            string path = DirectoryPath +
+                ((DirectoryPath.EndsWith("\\")) ? NameFolderCompositions : $"\\{NameFolderCompositions}");
+            foreach (var index in SelectedCompositions)
+            {
+                if (dataGridView1.SelectedRows.Count < 1)
+                    return;
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
+
+                Directory.CreateDirectory(path);
+
+                while (true)
+                {
+                    if (Directory.Exists(path + $"\\{NameId}"))
+                        NameId++;
+                    else
+                        break;
+                }
+                Directory.CreateDirectory(path + $"\\{NameId}\\{NameFolderKeys}");
+
+                string FilePath = path + $"\\{NameId}";
+
+                Composition composition = db.Compositions.Find(id);
+
+                File.WriteAllText(FilePath + "\\Text.txt", composition.Name);
+
+                if (backgroundWorkerExport.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+
+                int namberImage = 0;
+                foreach (Photo photo in composition.Photos)
+                {
+                    Image image = Librari.byteArrayToImage(photo.Image);
+                    image.Save(FilePath + $"\\{namberImage}image.jpg");
+                    File.WriteAllText(FilePath + $"\\{NameFolderKeys}\\{namberImage}Key.txt", photo.RightKey);
+                    namberImage++;
+                }
+                backgroundWorkerExport.ReportProgress(SelectedCompositions.Count);
+            }
+        }
+
+        private void backgroundWorkerExport_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Maximum = e.ProgressPercentage;
+            progressBar1.Value++;
+        }
+
+        private void backgroundWorkerExport_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show("Error!: " + e.Error.Message);
+            }
+            else if (e.Cancelled == false)
+            {
+                string message = ((int)e.Result > 1) ? "Compositions" : "Composition";
+                MessageBox.Show($"{message} have been Export");
+            }
+
+            UsedBackgroundWorker = false;
+        }
+
+        #endregion
+
+        #region Change Key
+
+        private void changeCompositionsKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetKey key = new GetKey();
+            if (key.ShowDialog() != DialogResult.OK)
+                return;
+            string newKey = new string(key.GetText.ToCharArray());
+
+            backgroundWorkerChangeKey.RunWorkerAsync(newKey);
+            UsedBackgroundWorker = true;
+        }
+
+        private void backgroundWorkerChangeKey_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            string newKey = e.Argument.ToString();
+            string Key = new string(this.Key.ToCharArray());
+
+            int numberMove = 0;
+            List<int> indexes = dataGridView1.SelectedRows.Cast<DataGridViewRow>().Select(i => i.Index).ToList();
+            e.Result = indexes.Count;
+
+            foreach(int id in indexes)
+                numberMove += Int32.Parse(dataGridView1[2,id].Value.ToString());
+            numberMove *= 2;
+
+            Random random = new Random();
+            foreach(int id in indexes)
+            {
+                int Id = Int32.Parse(dataGridView1[0, id].Value.ToString());
+                composition = db.Compositions.Find(Id);
+                NewImage[] newImages = new NewImage[composition.NumberPhotos];
+                composition.Name = Librari.Shifrovka(Librari.DeShifrovka(composition.Name,Key),newKey);
+                int i = 0;
+                foreach(Photo photo in composition.Photos)
+                {
+                    newImages[i] = new NewImage(photo,random);
+                    newImages[i].DeShifrovkaImage(Key);
+                    backgroundWorkerChangeKey.ReportProgress(numberMove);
+                    if (backgroundWorkerExport.CancellationPending == true)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+
+
+                    newImages[i].ShifrovkaImage();
+                    photo.RightKey = Librari.Shifrovka(newImages[i].RightKey,newKey);
+                    photo.Image = Librari.imageToByteArray(newImages[i].image);
+                    backgroundWorkerChangeKey.ReportProgress(numberMove);
+                    if (backgroundWorkerExport.CancellationPending == true)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+
+                    i++;
+                }
+                composition = null;
+            }
+        }
+
+        private void backgroundWorkerChangeKey_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Maximum = e.ProgressPercentage;
+            progressBar1.Value++;
+        }
+
+        private void backgroundWorkerChangeKey_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show("Error!: " + e.Error.Message);
+            }
+            else if (e.Cancelled == true)
+            {
+                db = new PhotoContext(Connect);
+            }
+            else
+            {
+                string message = ((int)e.Result > 1) ? "Compositions" : "Composition";
+                MessageBox.Show($"{message} has changed the key");
+                db.SaveChanges();
+            }
+
+            UsedBackgroundWorker = false;
+            dataGridView1_SelectionChanged(null,null);
         }
 
         #endregion
@@ -201,6 +406,7 @@ namespace Photo_cipher.Forms
             {
                 backgroundWorkerAdding.CancelAsync();
                 backgroundWorkerExport.CancelAsync();
+                backgroundWorkerChangeKey.CancelAsync();
             }
         }
 
@@ -208,7 +414,7 @@ namespace Photo_cipher.Forms
         {
             GetKey Key = new GetKey();
             Key.ShowDialog();
-            this.Key = new string(Key.maskedTextBox1.Text.ToCharArray());
+            this.Key = new string(Key.GetText.ToCharArray());
 
             if(sender != null & e != null)
                 dataGridView1_SelectionChanged(null, null);
@@ -286,101 +492,6 @@ namespace Photo_cipher.Forms
             dataGridView1_SelectionChanged(null, null);
         }
 
-        #region Export
-
-        private void buttonExport_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog DirectoryPath = new FolderBrowserDialog();
-            if (DirectoryPath.ShowDialog() != DialogResult.OK)
-                return;
-
-            backgroundWorkerExport.RunWorkerAsync(DirectoryPath.SelectedPath);
-            buttonAdd.Enabled = false;
-            exportToolStripMenuItem.Enabled = false;
-        }
-
-        private void backgroundWorkerExport_DoWork(object sender, DoWorkEventArgs e)
-        {
-            List<int> SelectedCompositions = dataGridView1.SelectedRows.Cast<DataGridViewRow>().Select(i => i.Index).ToList();
-            int NameId = 0;
-            string DirectoryPath = e.Argument.ToString();
-            string path = DirectoryPath +
-                ((DirectoryPath.EndsWith("\\")) ? NameFolderCompositions : $"\\{NameFolderCompositions}");
-            foreach (var index in SelectedCompositions)
-            {
-                if (dataGridView1.SelectedRows.Count < 1)
-                    return;
-                int id = 0;
-                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
-                if (converted == false)
-                    return;
-
-                Directory.CreateDirectory(path);
-
-                while (true)
-                {
-                    if (Directory.Exists(path + $"\\{NameId}"))
-                        NameId++;
-                    else
-                        break;
-                }
-                Directory.CreateDirectory(path + $"\\{NameId}\\{NameFolderKeys}");
-
-                string FilePath = path + $"\\{NameId}";
-
-                composition = db.Compositions.Find(id);
-
-                File.WriteAllText(FilePath + "\\Text.txt", composition.Name);
-                int namberImage = 0;
-
-                if (backgroundWorkerExport.CancellationPending == true)
-                {
-                    e.Cancel = true;
-                    break;
-                }
-
-                foreach (Photo photo in composition.Photos)
-                {
-                    Image image = Librari.byteArrayToImage(photo.Image);
-                    image.Save(FilePath + $"\\{namberImage}image.jpg");
-                    File.WriteAllText(FilePath + $"\\{NameFolderKeys}\\{namberImage}Key.txt", photo.RightKey);
-                    namberImage++;
-                }
-                backgroundWorkerExport.ReportProgress(SelectedCompositions.Count);
-            }
-            e.Result = SelectedCompositions.Count;
-        }
-
-        private void backgroundWorkerExport_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            buttonCancel.Visible = true;
-            progressBar1.Visible = true;
-            progressBar1.Maximum = e.ProgressPercentage;
-            progressBar1.Value++;
-        }
-
-        private void backgroundWorkerExport_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                MessageBox.Show("Error!: " + e.Error.Message);
-            }
-            else if (e.Cancelled == false)
-            {
-                string message = ((int)e.Result > 1) ? "Compositions" : "Composition";
-                MessageBox.Show($"{message} have been Export");
-            }
-
-            buttonCancel.Visible = false;
-            progressBar1.Visible = false;
-            progressBar1.Value = 0;
-
-            buttonAdd.Enabled = true;
-            exportToolStripMenuItem.Enabled = true;
-        }
-
-        #endregion
-
         private void buttonImport_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog DirectoryPath = new FolderBrowserDialog();
@@ -447,5 +558,6 @@ namespace Photo_cipher.Forms
             // TODO: This line of code loads data into the 'compositionDataSet.Compositions' table. You can move, or remove it, as needed.
             this.compositionsTableAdapter.Fill(this.compositionDataSet.Compositions);
         }
+
     }
 }
