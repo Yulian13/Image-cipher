@@ -159,11 +159,10 @@ namespace Photo_cipher.Forms
             close = true;
             for(int i = 0; i < NewImages.Length; i++)
             {
-                if (NewImages[i] == null)
-                    break;
-
-                NewImages[i].Dispose();
-                originImage[i].Dispose();
+                if (NewImages[i] != null)
+                    NewImages[i].Dispose();
+                if(originImage[i] != null)    
+                    originImage[i].Dispose();
             }
         }
     }

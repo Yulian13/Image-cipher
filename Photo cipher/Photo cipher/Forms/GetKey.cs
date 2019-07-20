@@ -12,7 +12,7 @@ namespace Photo_cipher.Forms
 {
     partial class GetKey : Form
     {
-        public string GetText => maskedTextBox1.Text;
+        public string GetText => (maskedTextBox1.Text.Length == 4) ? maskedTextBox1.Text : "" ;
 
         public GetKey()
         {
@@ -21,7 +21,7 @@ namespace Photo_cipher.Forms
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (maskedTextBox1.Text.Length == 4)
+            if (maskedTextBox1.Text.Length == 4 || label1.ForeColor == Color.Red)
                 this.DialogResult = DialogResult.OK;
             else
                 label1.ForeColor = Color.Red;

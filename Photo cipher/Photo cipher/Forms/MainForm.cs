@@ -321,6 +321,8 @@ namespace Photo_cipher.Forms
         {
 
             string newKey = e.Argument.ToString();
+            if (newKey.Length < 4) return;
+
             string Key = new string(this.Key.ToCharArray());
 
             int numberMove = 0;
@@ -329,42 +331,28 @@ namespace Photo_cipher.Forms
 
             foreach(int id in indexes)
                 numberMove += Int32.Parse(dataGridView1[2,id].Value.ToString());
-            numberMove *= 2;
 
             Random random = new Random();
             foreach(int id in indexes)
             {
                 int Id = Int32.Parse(dataGridView1[0, id].Value.ToString());
                 composition = db.Compositions.Find(Id);
-                NewImage[] newImages = new NewImage[composition.NumberPhotos];
                 composition.Name = Librari.Shifrovka(Librari.DeShifrovka(composition.Name,Key),newKey);
-                int i = 0;
                 foreach(Photo photo in composition.Photos)
                 {
-                    newImages[i] = new NewImage(photo,random);
-                    newImages[i].DeShifrovkaImage(Key);
-                    backgroundWorkerChangeKey.ReportProgress(numberMove);
                     if (backgroundWorkerExport.CancellationPending == true)
                     {
                         e.Cancel = true;
-                        break;
+                        return;
                     }
-
-
-                    newImages[i].ShifrovkaImage();
-                    photo.RightKey = Librari.Shifrovka(newImages[i].RightKey,newKey);
-                    photo.Image = Librari.imageToByteArray(newImages[i].image);
+                    photo.RightKey = Librari.Shifrovka(Librari.DeShifrovka(photo.RightKey, Key), newKey);
                     backgroundWorkerChangeKey.ReportProgress(numberMove);
-                    if (backgroundWorkerExport.CancellationPending == true)
-                    {
-                        e.Cancel = true;
-                        break;
-                    }
 
-                    i++;
                 }
+
                 composition = null;
             }
+            Key = newKey;
         }
 
         private void backgroundWorkerChangeKey_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -379,17 +367,14 @@ namespace Photo_cipher.Forms
             {
                 MessageBox.Show("Error!: " + e.Error.Message);
             }
-            else if (e.Cancelled == true)
-            {
-                db = new PhotoContext(Connect);
-            }
-            else
+            else if(e.Cancelled == false)
             {
                 string message = ((int)e.Result > 1) ? "Compositions" : "Composition";
                 MessageBox.Show($"{message} has changed the key");
                 db.SaveChanges();
             }
 
+            db = new PhotoContext(Connect);
             UsedBackgroundWorker = false;
             dataGridView1_SelectionChanged(null,null);
         }
