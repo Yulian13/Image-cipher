@@ -401,6 +401,8 @@ namespace Photo_cipher.Forms
             Key.ShowDialog();
             this.Key = new string(Key.GetText.ToCharArray());
 
+            buttonAdd.Enabled = !String.IsNullOrWhiteSpace(this.Key);
+
             if(sender != null & e != null)
                 dataGridView1_SelectionChanged(null, null);
         }

@@ -47,9 +47,6 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.labelNameComposistion = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberPhotosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.compositionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.compositionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.compositionDataSet = new Photo_cipher.CompositionDataSet();
@@ -59,6 +56,9 @@
             this.compositionsTableAdapter = new Photo_cipher.CompositionDataSetTableAdapters.CompositionsTableAdapter();
             this.backgroundWorkerExport = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerChangeKey = new System.ComponentModel.BackgroundWorker();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberPhotosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -180,14 +180,14 @@
             // buttonExport
             // 
             this.buttonExport.Name = "buttonExport";
-            this.buttonExport.Size = new System.Drawing.Size(180, 22);
+            this.buttonExport.Size = new System.Drawing.Size(110, 22);
             this.buttonExport.Text = "Export";
             this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.importToolStripMenuItem.Text = "Import";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.buttonImport_Click);
             // 
@@ -214,6 +214,9 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -225,33 +228,10 @@
             this.dataGridView1.Location = new System.Drawing.Point(271, 139);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(248, 312);
+            this.dataGridView1.Size = new System.Drawing.Size(245, 312);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.DoubleClick += new System.EventHandler(this.buttonOpen_Click);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 25;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // numberPhotosDataGridViewTextBoxColumn
-            // 
-            this.numberPhotosDataGridViewTextBoxColumn.DataPropertyName = "NumberPhotos";
-            this.numberPhotosDataGridViewTextBoxColumn.HeaderText = "NumberPhotos";
-            this.numberPhotosDataGridViewTextBoxColumn.Name = "numberPhotosDataGridViewTextBoxColumn";
-            this.numberPhotosDataGridViewTextBoxColumn.ReadOnly = true;
-            this.numberPhotosDataGridViewTextBoxColumn.Width = 80;
             // 
             // compositionsBindingSource
             // 
@@ -286,6 +266,7 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.buttonCancel.Location = new System.Drawing.Point(466, 24);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(50, 23);
@@ -315,6 +296,32 @@
             this.backgroundWorkerChangeKey.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerChangeKey_ProgressChanged);
             this.backgroundWorkerChangeKey.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerChangeKey_RunWorkerCompleted);
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            this.idDataGridViewTextBoxColumn.Width = 30;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // numberPhotosDataGridViewTextBoxColumn
+            // 
+            this.numberPhotosDataGridViewTextBoxColumn.DataPropertyName = "NumberPhotos";
+            this.numberPhotosDataGridViewTextBoxColumn.FillWeight = 50F;
+            this.numberPhotosDataGridViewTextBoxColumn.HeaderText = "Number";
+            this.numberPhotosDataGridViewTextBoxColumn.Name = "numberPhotosDataGridViewTextBoxColumn";
+            this.numberPhotosDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberPhotosDataGridViewTextBoxColumn.Width = 55;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,7 +336,6 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.buttonOpen);
             this.Controls.Add(this.buttonAdd);
-            this.MaximumSize = new System.Drawing.Size(542, 504);
             this.MinimumSize = new System.Drawing.Size(542, 504);
             this.Name = "MainForm";
             this.Text = "Form1";
@@ -364,9 +370,6 @@
         private System.Windows.Forms.ToolStripDropDownButton DownButtonMigration;
         private System.Windows.Forms.ToolStripMenuItem buttonExport;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numberPhotosDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolStripDropDownButton DropDownInstrument;
         private System.Windows.Forms.ToolStripMenuItem keyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeKeyToolStripMenuItem;
@@ -376,6 +379,9 @@
         private System.ComponentModel.BackgroundWorker backgroundWorkerExport;
         private System.Windows.Forms.ToolStripMenuItem changeCompositionsKeyToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundWorkerChangeKey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numberPhotosDataGridViewTextBoxColumn;
     }
 }
 
