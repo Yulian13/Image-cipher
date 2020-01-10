@@ -23,8 +23,6 @@ namespace Photo_cipher.Forms
             InitializeComponent();
 
             Directory.CreateDirectory(Path);
-
-            label1.Text = String.Format("{0:d2}",2);
         }
 
         private void buttonChecking_Click(object sender, EventArgs e)
