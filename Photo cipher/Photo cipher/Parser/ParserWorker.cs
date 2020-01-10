@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace MyParserTest.Core
+namespace Photo_cipher.Parser
 {
     class ParserWorker<T> where T : class
     {

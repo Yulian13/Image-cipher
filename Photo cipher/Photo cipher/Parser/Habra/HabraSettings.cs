@@ -1,4 +1,4 @@
-﻿namespace MyParserTest.Core.Habra
+﻿namespace Photo_cipher.Parser.Habra
 {
     class HabraSettings : IParserSettings
     {

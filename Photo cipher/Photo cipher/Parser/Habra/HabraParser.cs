@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyParserTest.Core.Habra
+namespace Photo_cipher.Parser.Habra
 {
     class HabraParser : IParser<string[]>
     {

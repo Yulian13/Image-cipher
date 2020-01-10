@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AngleSharp.Html.Dom;
 
-namespace MyParserTest.Core
+namespace Photo_cipher.Parser
 {
     interface IParser<T> where T : class
     {
