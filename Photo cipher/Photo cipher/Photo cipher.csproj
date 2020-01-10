@@ -117,7 +117,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NewImage.cs" />
-    <Compile Include="Parser\Habra\HabraParser.cs" />
+    <Compile Include="Parser\Habra\HabraParserNHentaiName.cs" />
+    <Compile Include="Parser\Habra\HabraParserNhentaiImg.cs" />
     <Compile Include="Parser\Habra\HabraSettings.cs" />
     <Compile Include="Parser\HtmlLoader.cs" />
     <Compile Include="Parser\IParser.cs" />

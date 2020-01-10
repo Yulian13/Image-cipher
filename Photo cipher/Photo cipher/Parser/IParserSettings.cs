@@ -9,7 +9,5 @@ namespace Photo_cipher.Parser
     interface IParserSettings
     {
         string BaseUrl { get; set; }
-
-        string Prefix { get; set; }
     }
 }

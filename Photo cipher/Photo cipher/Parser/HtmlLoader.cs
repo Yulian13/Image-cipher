@@ -12,7 +12,7 @@ namespace Photo_cipher.Parser
         public HtmlLoader(IParserSettings settings)
         {
             this.client = new HttpClient();
-            this.url = $"{settings.BaseUrl}/{settings.Prefix}/";
+            this.url = settings.BaseUrl;
         }
 
         public async Task<string> GetSourceByPageId()

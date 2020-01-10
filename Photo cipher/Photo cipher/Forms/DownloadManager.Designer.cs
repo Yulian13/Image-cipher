@@ -30,8 +30,11 @@
         {
             this.textBoxLink = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonCheckingName = new System.Windows.Forms.Button();
+            this.textBoxName = new System.Windows.Forms.TextBox();
             this.buttonDownload = new System.Windows.Forms.Button();
-            this.textBoxEnd = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // textBoxLink
@@ -53,36 +56,70 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Add Link";
             // 
+            // buttonCheckingName
+            // 
+            this.buttonCheckingName.Location = new System.Drawing.Point(12, 73);
+            this.buttonCheckingName.Name = "buttonCheckingName";
+            this.buttonCheckingName.Size = new System.Drawing.Size(75, 23);
+            this.buttonCheckingName.TabIndex = 2;
+            this.buttonCheckingName.Text = "Checking";
+            this.buttonCheckingName.UseVisualStyleBackColor = true;
+            this.buttonCheckingName.Click += new System.EventHandler(this.buttonChecking_Click);
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxName.Location = new System.Drawing.Point(12, 102);
+            this.textBoxName.Multiline = true;
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(316, 92);
+            this.textBoxName.TabIndex = 3;
+            // 
             // buttonDownload
             // 
-            this.buttonDownload.Location = new System.Drawing.Point(12, 73);
+            this.buttonDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonDownload.Enabled = false;
+            this.buttonDownload.Location = new System.Drawing.Point(12, 200);
             this.buttonDownload.Name = "buttonDownload";
             this.buttonDownload.Size = new System.Drawing.Size(75, 23);
-            this.buttonDownload.TabIndex = 2;
+            this.buttonDownload.TabIndex = 4;
             this.buttonDownload.Text = "Download";
             this.buttonDownload.UseVisualStyleBackColor = true;
             this.buttonDownload.Click += new System.EventHandler(this.buttonDownload_Click);
             // 
-            // textBoxEnd
+            // label2
             // 
-            this.textBoxEnd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(93, 78);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "label2";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxEnd.Location = new System.Drawing.Point(12, 102);
-            this.textBoxEnd.Multiline = true;
-            this.textBoxEnd.Name = "textBoxEnd";
-            this.textBoxEnd.Size = new System.Drawing.Size(316, 336);
-            this.textBoxEnd.TabIndex = 3;
+            this.progressBar1.Location = new System.Drawing.Point(135, 72);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(193, 23);
+            this.progressBar1.TabIndex = 6;
             // 
             // DownloadManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 450);
-            this.Controls.Add(this.textBoxEnd);
+            this.ClientSize = new System.Drawing.Size(340, 233);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonDownload);
+            this.Controls.Add(this.textBoxName);
+            this.Controls.Add(this.buttonCheckingName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxLink);
-            this.MinimumSize = new System.Drawing.Size(356, 489);
+            this.MinimumSize = new System.Drawing.Size(356, 272);
             this.Name = "DownloadManager";
             this.Text = "DownloadManager";
             this.ResumeLayout(false);
@@ -94,7 +131,10 @@
 
         private System.Windows.Forms.TextBox textBoxLink;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonCheckingName;
+        private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Button buttonDownload;
-        private System.Windows.Forms.TextBox textBoxEnd;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
