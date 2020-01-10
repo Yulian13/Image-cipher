@@ -62,6 +62,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CompositionDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DownloadManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DownloadManager.Designer.cs">
+      <DependentUpon>DownloadManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\EnterString.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     <Compile Include="Forms\Watching.Designer.cs">
       <DependentUpon>Watching.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\DownloadManager.resx">
+      <DependentUpon>DownloadManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\EnterString.resx">
       <DependentUpon>EnterString.cs</DependentUpon>
     </EmbeddedResource>

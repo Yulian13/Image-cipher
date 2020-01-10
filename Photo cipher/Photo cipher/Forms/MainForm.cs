@@ -217,6 +217,17 @@ namespace Photo_cipher.Forms
 
         #endregion
 
+        private void buttonAddLink_Click(object sender, EventArgs e)
+        {
+            DownloadManager download = new DownloadManager();
+            var result = download.ShowDialog();
+
+            if (result != DialogResult.OK)
+                return;
+
+
+        }
+
         #region Export
 
         private void buttonExport_Click(object sender, EventArgs e)
@@ -545,6 +556,5 @@ namespace Photo_cipher.Forms
             // TODO: This line of code loads data into the 'compositionDataSet.Compositions' table. You can move, or remove it, as needed.
             this.compositionsTableAdapter.Fill(this.compositionDataSet.Compositions);
         }
-
     }
 }

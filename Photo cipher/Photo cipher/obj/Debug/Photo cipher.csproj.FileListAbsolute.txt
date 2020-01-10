@@ -39,3 +39,4 @@ C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\P
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Forms.Watching.resources
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Forms.MainForm.resources
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Forms.EnterString.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo_cipher.Forms.DownloadManager.resources
