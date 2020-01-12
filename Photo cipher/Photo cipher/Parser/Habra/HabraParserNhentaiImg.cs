@@ -5,7 +5,7 @@ using AngleSharp.Html.Dom;
 
 namespace Photo_cipher.Parser.Habra
 {
-    class HabraParserNhentaiImg : IParser<string>
+    class HabraParserNhentaiImg : IParser<SimpleObjectImg>
     {
         const string Teg = "img";
         const string ClassName = "fit-horizontal";
@@ -23,7 +23,7 @@ namespace Photo_cipher.Parser.Habra
             Link = link;
         }
 
-        public string Parser(IHtmlDocument document)
+        public SimpleObjectImg Parser(IHtmlDocument document)
         {
             var list = new List<string>();
 
@@ -35,7 +35,20 @@ namespace Photo_cipher.Parser.Habra
 
             linkImg = linkImg.Remove(linkImg.LastIndexOf('/')+1);
 
-            return linkImg;
+            return new SimpleObjectImg(linkImg, number);
+        }
+    }
+
+    class SimpleObjectImg
+    {
+        public string Name;
+
+        public int number;
+
+        public SimpleObjectImg(string name, int number)
+        {
+            Name = name;
+            this.number = number;
         }
     }
 }

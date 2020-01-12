@@ -23,6 +23,7 @@ namespace Photo_cipher.Forms
             InitializeComponent();
 
             buttonDownload.Enabled = false;
+            progressDownload.Visible = false;
         }
 
         private void buttonChecking_Click(object sender, EventArgs e)
@@ -32,6 +33,7 @@ namespace Photo_cipher.Forms
                 _OnError(null);
                 return;
             }
+
             buttonCheckingName.Enabled = false;
             ParserWorker<string> parserName = new ParserWorker<string>(
                                                     new HabraParserNHentaiName(),
@@ -62,42 +64,66 @@ namespace Photo_cipher.Forms
 
             string LinkImg = GetLink + "1/";
 
-            ParserWorker<string> parser = new ParserWorker<string>(
+            ParserWorker<SimpleObjectImg> parser = new ParserWorker<SimpleObjectImg>(
                                               new HabraParserNhentaiImg(LinkImg),
                                               new HabraSettings(LinkImg)
                                            );
             parser.OnNewData += Parser_OnNewData;
+            parser.OnError += _OnError;
             parser.Start();
         }
 
-        private void Parser_OnNewData(object arg1, string result)
+        private void Parser_OnNewData(object arg1, SimpleObjectImg result)
         {
-            int i = 1;
+            progressDownload.Visible = true;
+            progressDownload.Maximum = result.number;
+
+            backgroundWorker1.RunWorkerAsync(result);
+        }
+
+        private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            SimpleObjectImg result = (SimpleObjectImg)e.Argument;
+
             string newPath = $"{Path}\\{textBoxName.Text}";
             Directory.CreateDirectory(newPath);
 
             var wc = new WebClient();
-            while (true)
+
+            for(int i = 1; i<=result.number; i++)
             {
+                string PathImg = String.Format("{0}\\{1:d2}.jpg", newPath, i);
                 try
                 {
-                    wc.DownloadFile($"{result}{i}.jpg", String.Format("{0}\\{1:d2}.jpg", newPath, i));
+                    wc.DownloadFile($"{result.Name}{i}.jpg", PathImg);
                 }
-                catch (WebException)
+                catch (Exception)
                 {
                     try
                     {
-                        wc.DownloadFile($"{result}{i}.png", String.Format("{0}\\{1:d2}.jpg", newPath, i));
+                        wc.DownloadFile($"{result.Name}{i}.png", PathImg);
                     }
-                    catch (WebException)
+                    catch (Exception ex)
                     {
-                        break;
+                        MessageBox.Show(ex.Message);
                     }
                 }
-                label2.Text = $"{i}";
-                i++;
+
+                backgroundWorker1.ReportProgress(i);
             }
-            label2.Text = "Finish";
+        }
+
+        private void _ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            labelStatus.Text = $"{e.ProgressPercentage}";
+
+            progressDownload.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            labelStatus.Text = "Finish";
+            progressDownload.Visible = false;
         }
     }
 }
