@@ -22,20 +22,30 @@ namespace Photo_cipher.Forms
         {
             InitializeComponent();
 
-            Directory.CreateDirectory(Path);
+            buttonDownload.Enabled = false;
         }
 
         private void buttonChecking_Click(object sender, EventArgs e)
         {
+            if (!GetLink.Contains("nhentai.net"))
+            {
+                _OnError(null);
+                return;
+            }
             buttonCheckingName.Enabled = false;
-
             ParserWorker<string> parserName = new ParserWorker<string>(
-                                                new HabraParserNHentaiName(),
-                                                new HabraSettings(GetLink)
-                                             );
-            parserName.OnNewData += ParserName_OnNewData; ;
+                                                    new HabraParserNHentaiName(),
+                                                    new HabraSettings(GetLink)
+                                                 );
+            parserName.OnNewData += ParserName_OnNewData;
+            parserName.OnError += _OnError;
 
             parserName.Start();
+        }
+
+        private void _OnError(object obj)
+        {
+            MessageBox.Show("Link is wrong");
         }
 
         private void ParserName_OnNewData(object arg1, string result)

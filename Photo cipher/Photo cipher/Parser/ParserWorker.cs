@@ -11,8 +11,6 @@ namespace Photo_cipher.Parser
 
         HtmlLoader loader;
 
-        bool isActive;
-
         #region Properties
 
         public IParser<T> Parser
@@ -40,16 +38,10 @@ namespace Photo_cipher.Parser
             }
         }
 
-        public bool IsActive
-        {
-            get
-            {
-                return isActive;
-            }
-        }
         #endregion
 
         public event Action<object, T> OnNewData;
+        public event Action<object> OnError;
 
         public ParserWorker(IParser<T> parser)
         {
@@ -63,23 +55,23 @@ namespace Photo_cipher.Parser
 
         public void Start()
         {
-            isActive = true;
             Worker();
-        }
-
-        public void Abort()
-        {
-            isActive = false;
         }
 
         private async void Worker()
         {
-            if (!isActive)
+            string sourse = null;
+            try
             {
+                sourse = await loader.GetSourceByPageId();
+                if (String.IsNullOrEmpty(sourse))
+                    throw new Exception();
+            }
+            catch
+            {
+                OnError?.Invoke(this);
                 return;
             }
-
-            var sourse = await loader.GetSourceByPageId();
             var domParser = new HtmlParser();
 
             var document = await domParser.ParseDocumentAsync(sourse);
@@ -87,8 +79,6 @@ namespace Photo_cipher.Parser
             var result = parser.Parser(document);
 
             OnNewData?.Invoke(this, result);
-
-            isActive = false;
         }
     }
 }
