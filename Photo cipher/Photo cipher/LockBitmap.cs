@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace Photo_cipher
 {
-    public class LockBitmap
+    public class LockBitmap : IDisposable
     {
         Bitmap source = null;
         IntPtr Iptr = IntPtr.Zero;
@@ -159,6 +159,11 @@ namespace Photo_cipher
             {
                 Pixels[i] = color.B;
             }
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

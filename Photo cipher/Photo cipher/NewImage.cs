@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Photo_cipher
 {
-    public class NewImage
+    public class NewImage : IDisposable
     {
         public Bitmap image;
 
@@ -33,23 +33,24 @@ namespace Photo_cipher
         {
             if (rndm == null) rndm = new Random();
 
-            LockBitmap Image = new LockBitmap(image);
-            Image.LockBits();
+            using (LockBitmap Image = new LockBitmap(image)) {
+                Image.LockBits();
 
-            RightKey = "";
-            for (int i = 0; i < Height; i++)
-            {
-                int Move = rndm.Next(33, Width - 1);
-                RightKey += (char)Move;
-                Color[] NewPixels = new Color[Width];
-                for (int j = 0; j < Width; j++)
-                    NewPixels[j] = Image.GetPixel(j, i);
+                RightKey = "";
+                for (int i = 0; i < Height; i++)
+                {
+                    int Move = rndm.Next(33, Width - 1);
+                    RightKey += (char)Move;
+                    Color[] NewPixels = new Color[Width];
+                    for (int j = 0; j < Width; j++)
+                        NewPixels[j] = Image.GetPixel(j, i);
 
-                for (int j = 0; j < Width; j++)
-                    Image.SetPixel(j, i, NewPixels[(j > Move) ? j - Move : (Width - 1) - (Move - j)]);
+                    for (int j = 0; j < Width; j++)
+                        Image.SetPixel(j, i, NewPixels[(j > Move) ? j - Move : (Width - 1) - (Move - j)]);
+                }
+
+                Image.UnlockBits();
             }
-
-            Image.UnlockBits();
 
             return image;
         }
@@ -58,24 +59,32 @@ namespace Photo_cipher
         {
             if (rndm == null) rndm = new Random();
 
-            LockBitmap Image = new LockBitmap(image);
-            Image.LockBits();
-
-            string s = Librari.DeShifrovka(RightKey, Key);
-            char[] MovesRight = s.ToCharArray();
-            for (int i = 0; i < Height; i++)
+            using (LockBitmap Image = new LockBitmap(image))
             {
-                int Move = Width - MovesRight[(i > MovesRight.Length - 1) ? MovesRight.Length - 1 : i];
-                Color[] NewPixels = new Color[Width];
-                for (int j = 0; j < Width; j++)
-                    NewPixels[j] = Image.GetPixel(j, i);
-                for (int j = 0; j < Width; j++)
-                    Image.SetPixel(j, i, NewPixels[(j > Move) ? j - Move : (Width - 1) - (Move - j)]);
+                Image.LockBits();
+
+                string s = Librari.DeShifrovka(RightKey, Key);
+                char[] MovesRight = s.ToCharArray();
+                for (int i = 0; i < Height; i++)
+                {
+                    int Move = Width - MovesRight[(i > MovesRight.Length - 1) ? MovesRight.Length - 1 : i];
+                    Color[] NewPixels = new Color[Width];
+                    for (int j = 0; j < Width; j++)
+                        NewPixels[j] = Image.GetPixel(j, i);
+                    for (int j = 0; j < Width; j++)
+                        Image.SetPixel(j, i, NewPixels[(j > Move) ? j - Move : (Width - 1) - (Move - j)]);
+                }
+
+                Image.UnlockBits();
+
             }
 
-            Image.UnlockBits();
-
             return image;
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }
