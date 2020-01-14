@@ -28,15 +28,9 @@ namespace Photo_cipher.Forms
 
         private void buttonChecking_Click(object sender, EventArgs e)
         {
-            if (!GetLink.Contains("nhentai.net"))
-            {
-                _OnError(null);
-                return;
-            }
-
             buttonCheckingName.Enabled = false;
             ParserWorker<string> parserName = new ParserWorker<string>(
-                                                    new HabraParserNHentaiName(),
+                                                    new HabraParserName(),
                                                     new HabraSettings(GetLink)
                                                  );
             parserName.OnNewData += ParserName_OnNewData;
@@ -65,7 +59,7 @@ namespace Photo_cipher.Forms
             string LinkImg = GetLink + "1/";
 
             ParserWorker<SimpleObjectImg> parser = new ParserWorker<SimpleObjectImg>(
-                                              new HabraParserNhentaiImg(LinkImg),
+                                              new HabraParserImg(LinkImg),
                                               new HabraSettings(LinkImg)
                                            );
             parser.OnNewData += Parser_OnNewData;

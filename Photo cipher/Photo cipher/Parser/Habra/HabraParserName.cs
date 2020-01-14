@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Photo_cipher.Parser.Habra
 {
-    class HabraParserNHentaiName : IParser<string>
+    class HabraParserName : IParser<string>
     {
         const string TegName = "h1";
 

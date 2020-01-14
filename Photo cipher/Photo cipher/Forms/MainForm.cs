@@ -81,10 +81,6 @@ namespace Photo_cipher.Forms
         {
             InitializeComponent();
 
-            //Remove
-            var a = new DownloadManager();
-            var b = a.ShowDialog();
-
             RatioSize = (float)pictureBox1.Width / pictureBox1.Height;
 
             try
