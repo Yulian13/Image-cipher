@@ -72,6 +72,17 @@ namespace Photo_cipher.Forms
             progressDownload.Visible = true;
             progressDownload.Maximum = result.number;
 
+            string newPath = $"{Path}\\{textBoxName.Text}";
+            try
+            {
+                Directory.CreateDirectory(newPath);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
             backgroundWorker1.RunWorkerAsync(result);
         }
 
@@ -80,7 +91,6 @@ namespace Photo_cipher.Forms
             SimpleObjectImg result = (SimpleObjectImg)e.Argument;
 
             string newPath = $"{Path}\\{textBoxName.Text}";
-            Directory.CreateDirectory(newPath);
 
             var wc = new WebClient();
 
