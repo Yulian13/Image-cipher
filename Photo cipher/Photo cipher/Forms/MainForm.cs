@@ -18,8 +18,6 @@ namespace Photo_cipher.Forms
         static PhotoContext db;
         static Composition composition;
 
-        float RatioSize;
-
         string Key;
         const string NameFolderCompositions = "CompositionImage";
         const string NameFolderKeys         = "Keys";
@@ -80,8 +78,6 @@ namespace Photo_cipher.Forms
         public MainForm()
         {
             InitializeComponent();
-
-            RatioSize = (float)pictureBox1.Width / pictureBox1.Height;
 
             try
             {
@@ -428,13 +424,7 @@ namespace Photo_cipher.Forms
                 Photo photo = db.Photos.Find(composition.IdFirstPhoto);
                 Image newImage = new NewImage(photo).DeShifrovkaImage(Key);
 
-                float newRatioSize = (float)newImage.Width / newImage.Height;
-                pictureBox1.Size = new Size(250,400);
-                if (RatioSize < newRatioSize)
-                    pictureBox1.Height = (int)(pictureBox1.Height * RatioSize / newRatioSize);
-                else
-                    pictureBox1.Width = (int)(pictureBox1.Width / RatioSize * newRatioSize);
-                pictureBox1.Image = new Bitmap(newImage, pictureBox1.Size);
+                pictureBox1.Image = newImage;
                 RightKey = true;
             }
             catch(System.Security.Cryptography.CryptographicException) {
