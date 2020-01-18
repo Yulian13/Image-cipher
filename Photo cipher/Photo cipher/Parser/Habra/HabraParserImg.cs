@@ -14,15 +14,6 @@ namespace Photo_cipher.Parser.Habra
         const string TegNamber = "span";
         const string ClassNamber = "num-pages";
 
-        string Link;
-
-        int number;
-
-        public HabraParserImg(string link)
-        {
-            Link = link;
-        }
-
         public SimpleObjectImg Parser(IHtmlDocument document)
         {
             var list = new List<string>();
@@ -30,7 +21,7 @@ namespace Photo_cipher.Parser.Habra
             string linkImg = document.QuerySelectorAll(Teg).
                 Where(ele => ele.ClassName == ClassName).FirstOrDefault().GetAttribute(Attribut);
 
-            number = Int32.Parse(document.QuerySelectorAll(TegNamber).
+            int number = Int32.Parse(document.QuerySelectorAll(TegNamber).
                 Where(ele => ele.ClassName == ClassNamber).FirstOrDefault().TextContent);
 
             linkImg = linkImg.Remove(linkImg.LastIndexOf('/')+1);
@@ -41,13 +32,12 @@ namespace Photo_cipher.Parser.Habra
 
     class SimpleObjectImg
     {
-        public string Name;
-
+        public string LinkImg;
         public int number;
 
-        public SimpleObjectImg(string name, int number)
+        public SimpleObjectImg(string linkImg, int number)
         {
-            Name = name;
+            LinkImg = linkImg;
             this.number = number;
         }
     }

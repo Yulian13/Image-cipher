@@ -33,7 +33,7 @@
             this.buttonCheckingName = new System.Windows.Forms.Button();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.buttonDownload = new System.Windows.Forms.Button();
-            this.labelStatus = new System.Windows.Forms.Label();
+            this.labelProgress = new System.Windows.Forms.Label();
             this.progressDownload = new System.Windows.Forms.ProgressBar();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
@@ -91,12 +91,12 @@
             // 
             // labelStatus
             // 
-            this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(93, 78);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(35, 13);
-            this.labelStatus.TabIndex = 5;
-            this.labelStatus.Text = "label2";
+            this.labelProgress.AutoSize = true;
+            this.labelProgress.Location = new System.Drawing.Point(93, 78);
+            this.labelProgress.Name = "labelStatus";
+            this.labelProgress.Size = new System.Drawing.Size(35, 13);
+            this.labelProgress.TabIndex = 5;
+            this.labelProgress.Text = "label2";
             // 
             // progressDownload
             // 
@@ -121,7 +121,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(340, 233);
             this.Controls.Add(this.progressDownload);
-            this.Controls.Add(this.labelStatus);
+            this.Controls.Add(this.labelProgress);
             this.Controls.Add(this.buttonDownload);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.buttonCheckingName);
@@ -142,7 +142,7 @@
         private System.Windows.Forms.Button buttonCheckingName;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Button buttonDownload;
-        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Label labelProgress;
         private System.Windows.Forms.ProgressBar progressDownload;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
