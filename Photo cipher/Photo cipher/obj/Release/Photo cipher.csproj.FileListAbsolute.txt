@@ -6,14 +6,124 @@ C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\EntityFramework.xml
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\EntityFramework.SqlServer.xml
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.csprojAssemblyReference.cache
-C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Form1.resources
-C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.GetKey.resources
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Migrations.InitialCreate.resources
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Migrations.AddCompanyMigration.resources
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Properties.Resources.resources
-C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Watching.resources
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.csproj.GenerateResource.cache
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.csproj.CoreCompileInputs.cache
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.csproj.CopyComplete
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.exe
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.pdb
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\Microsoft.Win32.Primitives.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\netstandard.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.AppContext.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Collections.Concurrent.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Collections.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Collections.NonGeneric.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Collections.Specialized.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.ComponentModel.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.ComponentModel.EventBasedAsync.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.ComponentModel.Primitives.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.ComponentModel.TypeConverter.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Console.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Data.Common.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Diagnostics.Contracts.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Diagnostics.Debug.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Diagnostics.FileVersionInfo.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Diagnostics.Process.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Diagnostics.StackTrace.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Diagnostics.TextWriterTraceListener.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Diagnostics.Tools.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Diagnostics.TraceSource.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Diagnostics.Tracing.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Drawing.Primitives.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Dynamic.Runtime.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Globalization.Calendars.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Globalization.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Globalization.Extensions.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.IO.Compression.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.IO.Compression.ZipFile.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.IO.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.IO.FileSystem.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.IO.FileSystem.DriveInfo.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.IO.FileSystem.Primitives.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.IO.FileSystem.Watcher.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.IO.IsolatedStorage.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.IO.MemoryMappedFiles.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.IO.Pipes.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.IO.UnmanagedMemoryStream.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Linq.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Linq.Expressions.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Linq.Parallel.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Linq.Queryable.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Net.Http.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Net.NameResolution.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Net.NetworkInformation.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Net.Ping.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Net.Primitives.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Net.Requests.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Net.Security.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Net.Sockets.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Net.WebHeaderCollection.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Net.WebSockets.Client.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Net.WebSockets.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.ObjectModel.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Reflection.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Reflection.Extensions.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Reflection.Primitives.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Resources.Reader.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Resources.ResourceManager.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Resources.Writer.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.CompilerServices.VisualC.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.Extensions.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.Handles.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.InteropServices.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.Numerics.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.Serialization.Formatters.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.Serialization.Json.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.Serialization.Primitives.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.Serialization.Xml.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Security.Claims.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Security.Cryptography.Algorithms.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Security.Cryptography.Csp.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Security.Cryptography.Encoding.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Security.Cryptography.Primitives.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Security.Cryptography.X509Certificates.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Security.Principal.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Security.SecureString.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Text.Encoding.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Text.Encoding.Extensions.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Text.RegularExpressions.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Threading.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Threading.Overlapped.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Threading.Tasks.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Threading.Tasks.Parallel.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Threading.Thread.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Threading.ThreadPool.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Threading.Timer.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.ValueTuple.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Xml.ReaderWriter.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Xml.XDocument.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Xml.XmlDocument.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Xml.XmlSerializer.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Xml.XPath.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Xml.XPath.XDocument.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\AngleSharp.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Text.Encoding.CodePages.dll
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\AngleSharp.xml
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.exe.config
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Forms.DownloadManager.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Forms.EnterString.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Forms.MainForm.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Forms.GetKey.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Forms.ImportCompositions.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Migrations.AddCompanyMigration1.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo_cipher.Forms.Watching.resources
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\Photo cipher.exe.manifest
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Release\Photo cipher.application
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.exe.manifest
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Release\Photo cipher.application

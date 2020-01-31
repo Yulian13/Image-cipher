@@ -142,3 +142,7 @@ C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Debug\S
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Debug\AngleSharp.xml
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.exe.config
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Debug\Photo cipher.exe.manifest
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\bin\Debug\Photo cipher.application
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.exe.manifest
+C:\Users\ylian13\source\repos\Image-cipher\Photo cipher\Photo cipher\obj\Debug\Photo cipher.application

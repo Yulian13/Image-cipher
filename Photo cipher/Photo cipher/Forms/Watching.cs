@@ -33,11 +33,11 @@ namespace Photo_cipher.Forms
             }
         }
 
-        public Watching(Composition composition, string Key)
+        public Watching(Composition composition,  Image startPhoto, string Key)
         {
             InitializeComponent();
 
-            this.Key = new string(Key.ToCharArray());
+            this.Key = new String(Key.ToCharArray());
             this.Text = Librari.DeShifrovka(composition.Name, this.Key);
             originImage = new Image[composition.Photos.Count];
             NewImages   = new Image[composition.Photos.Count];
@@ -45,9 +45,11 @@ namespace Photo_cipher.Forms
 
             ProgressBarProgress.Maximum = ReadyPhotos.Length;
             ProgressBarView.Maximum = ReadyPhotos.Length;
+
             backgroundWorker1.RunWorkerAsync(composition);
 
-            while (ReadyPhotos[0] != true) { }
+            NewImages[0] = startPhoto;
+
             NumberPhoto = 0;
         }
 

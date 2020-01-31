@@ -89,8 +89,6 @@ namespace Photo_cipher.Forms
                 MessageBox.Show($"Error: {ex}");
                 return;
             }
-            if(db.Compositions.Count() == 0)
-                db.Compositions.Add(new Composition() {Name = "Crutch", NumberPhotos = 12 });// Crutch
 
             dataGridView1.DataSource = db.Compositions.Local.ToBindingList();
 
@@ -197,9 +195,6 @@ namespace Photo_cipher.Forms
                 db.SaveChanges();
 
                 composition.IdFirstPhoto = composition.Photos.First().Id;
-
-                if (db.Compositions.First().Name == "Crutch")
-                    db.Compositions.Remove(db.Compositions.First());// Crutch
 
                 db.SaveChanges();
 
@@ -415,7 +410,11 @@ namespace Photo_cipher.Forms
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             int id = NowId;
-            if (id < 0) return;
+            if (id < 0) {
+                pictureBox1.Image = null;
+                return;
+            } 
+
 
             try
             {
@@ -440,7 +439,7 @@ namespace Photo_cipher.Forms
             }
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private async void buttonDelete_Click(object sender, EventArgs e)
         {            
             DialogResult result = MessageBox.Show("Do you really want to delete it?", "Deleting",
             MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2,
@@ -457,7 +456,11 @@ namespace Photo_cipher.Forms
             db.Photos.RemoveRange(composition.Photos);
             db.Compositions.Remove(composition);
 
-            db.SaveChanges();
+            buttonDelete.Enabled = false;
+
+            await db.SaveChangesAsync();
+
+            buttonDelete.Enabled = true;
 
             dataGridView1_SelectionChanged(null,null);
             MessageBox.Show("Composition have been Deleted");
@@ -468,7 +471,7 @@ namespace Photo_cipher.Forms
             int id = NowId;
             if (id < 0) return;
 
-            Watching watching = new Watching(db.Compositions.Find(id),Key);
+            Watching watching = new Watching(db.Compositions.Find(id), pictureBox1.Image, Key);
             watching.Show();
         }
 
