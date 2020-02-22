@@ -60,6 +60,7 @@
             this.backgroundWorkerExport = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerChangeKey = new System.ComponentModel.BackgroundWorker();
             this.buttonAddLink = new System.Windows.Forms.Button();
+            this.buttonRandom = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -335,11 +336,22 @@
             this.buttonAddLink.UseVisualStyleBackColor = true;
             this.buttonAddLink.Click += new System.EventHandler(this.buttonAddLink_Click);
             // 
+            // buttonRandom
+            // 
+            this.buttonRandom.Location = new System.Drawing.Point(417, 81);
+            this.buttonRandom.Name = "buttonRandom";
+            this.buttonRandom.Size = new System.Drawing.Size(140, 23);
+            this.buttonRandom.TabIndex = 13;
+            this.buttonRandom.Text = "Get random";
+            this.buttonRandom.UseVisualStyleBackColor = true;
+            this.buttonRandom.Click += new System.EventHandler(this.buttonRandom_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(567, 465);
+            this.Controls.Add(this.buttonRandom);
             this.Controls.Add(this.buttonAddLink);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.progressBar1);
@@ -397,6 +409,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberPhotosDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button buttonAddLink;
+        private System.Windows.Forms.Button buttonRandom;
     }
 }
 

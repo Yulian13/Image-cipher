@@ -547,5 +547,19 @@ namespace Photo_cipher.Forms
             // TODO: This line of code loads data into the 'compositionDataSet.Compositions' table. You can move, or remove it, as needed.
             this.compositionsTableAdapter.Fill(this.compositionDataSet.Compositions);
         }
+
+        private void buttonRandom_Click(object sender, EventArgs e)
+        {
+            var rn = new Random();
+            int number;
+
+            do
+            {
+                number = rn.Next(dataGridView1.RowCount);
+            }
+            while (dataGridView1.CurrentRow.Index == number);
+
+            dataGridView1.CurrentCell = dataGridView1[1, number];
+        }
     }
 }
