@@ -8,7 +8,6 @@ namespace Photo_cipher.Parser.Habra
     class HabraParserImg : IParser<SimpleObjectImg>
     {
         const string Teg = "img";
-        const string ClassName = "fit-horizontal";
         const string Attribut = "src";
 
         const string TegNamber = "span";
@@ -18,8 +17,7 @@ namespace Photo_cipher.Parser.Habra
         {
             var list = new List<string>();
 
-            string linkImg = document.QuerySelectorAll(Teg).
-                Where(ele => ele.ClassName == ClassName).FirstOrDefault().GetAttribute(Attribut);
+            string linkImg = document.QuerySelectorAll(Teg).LastOrDefault().GetAttribute(Attribut);
 
             int number = Int32.Parse(document.QuerySelectorAll(TegNamber).
                 Where(ele => ele.ClassName == ClassNamber).FirstOrDefault().TextContent);
