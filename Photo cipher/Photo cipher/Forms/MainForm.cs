@@ -30,9 +30,9 @@ namespace Photo_cipher.Forms
                 if (dataGridView1.SelectedRows.Count < 1)
                     return -1;
 
-                int index = dataGridView1.SelectedRows[0].Index;
+                int index = dataGridView1.SelectedRows[idDataGridViewTextBoxColumn.Index].Index;
                 int id = 0;
-                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+                bool converted = Int32.TryParse(dataGridView1[idDataGridViewTextBoxColumn.Index, index].Value.ToString(), out id);
                 if (converted == false)
                     return -1;
                 return id;

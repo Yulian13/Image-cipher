@@ -47,9 +47,6 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.labelNameComposistion = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberPhotosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.compositionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.compositionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.compositionDataSet = new Photo_cipher.CompositionDataSet();
@@ -61,6 +58,10 @@
             this.backgroundWorkerChangeKey = new System.ComponentModel.BackgroundWorker();
             this.buttonAddLink = new System.Windows.Forms.Button();
             this.buttonRandom = new System.Windows.Forms.Button();
+            this.OrigName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberPhotosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -224,6 +225,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
+            this.OrigName,
             this.nameDataGridViewTextBoxColumn,
             this.numberPhotosDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.compositionsBindingSource;
@@ -235,36 +237,10 @@
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.DoubleClick += new System.EventHandler(this.buttonOpen_Click);
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Visible = false;
-            this.idDataGridViewTextBoxColumn.Width = 30;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // numberPhotosDataGridViewTextBoxColumn
-            // 
-            this.numberPhotosDataGridViewTextBoxColumn.DataPropertyName = "NumberPhotos";
-            this.numberPhotosDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.numberPhotosDataGridViewTextBoxColumn.HeaderText = "Number";
-            this.numberPhotosDataGridViewTextBoxColumn.Name = "numberPhotosDataGridViewTextBoxColumn";
-            this.numberPhotosDataGridViewTextBoxColumn.ReadOnly = true;
-            this.numberPhotosDataGridViewTextBoxColumn.Width = 55;
-            // 
             // compositionsBindingSource
             // 
             this.compositionsBindingSource.DataMember = "Compositions";
-            this.compositionsBindingSource.DataSource = this.compositionDataSetBindingSource;
+            this.compositionsBindingSource.DataSource = this.compositionDataSet;
             // 
             // compositionDataSetBindingSource
             // 
@@ -346,6 +322,38 @@
             this.buttonRandom.UseVisualStyleBackColor = true;
             this.buttonRandom.Click += new System.EventHandler(this.buttonRandom_Click);
             // 
+            // OrigName
+            // 
+            this.OrigName.HeaderText = "orid name";
+            this.OrigName.Name = "OrigName";
+            this.OrigName.ReadOnly = true;
+            // 
+            // numberPhotosDataGridViewTextBoxColumn
+            // 
+            this.numberPhotosDataGridViewTextBoxColumn.DataPropertyName = "NumberPhotos";
+            this.numberPhotosDataGridViewTextBoxColumn.FillWeight = 50F;
+            this.numberPhotosDataGridViewTextBoxColumn.HeaderText = "Number";
+            this.numberPhotosDataGridViewTextBoxColumn.Name = "numberPhotosDataGridViewTextBoxColumn";
+            this.numberPhotosDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberPhotosDataGridViewTextBoxColumn.Width = 55;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            this.idDataGridViewTextBoxColumn.Width = 30;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -405,11 +413,12 @@
         private System.ComponentModel.BackgroundWorker backgroundWorkerExport;
         private System.Windows.Forms.ToolStripMenuItem changeCompositionsKeyToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundWorkerChangeKey;
+        private System.Windows.Forms.Button buttonAddLink;
+        private System.Windows.Forms.Button buttonRandom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrigName;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberPhotosDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button buttonAddLink;
-        private System.Windows.Forms.Button buttonRandom;
     }
 }
 
