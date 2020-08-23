@@ -47,26 +47,24 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.labelNameComposistion = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.compositionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.compositionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.compositionDataSet = new Photo_cipher.CompositionDataSet();
             this.backgroundWorkerAdding = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.compositionsTableAdapter = new Photo_cipher.CompositionDataSetTableAdapters.CompositionsTableAdapter();
             this.backgroundWorkerExport = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerChangeKey = new System.ComponentModel.BackgroundWorker();
             this.buttonAddLink = new System.Windows.Forms.Button();
             this.buttonRandom = new System.Windows.Forms.Button();
-            this.OrigName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberPhotosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compositionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.compositionDataSet = new Photo_cipher.CompositionDataSet();
+            this.compositionsTableAdapter = new Photo_cipher.CompositionDataSetTableAdapters.CompositionsTableAdapter();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrigNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberPhotosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositionsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.compositionDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositionDataSet)).BeginInit();
             this.SuspendLayout();
             // 
@@ -225,7 +223,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
-            this.OrigName,
+            this.OrigNameDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
             this.numberPhotosDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.compositionsBindingSource;
@@ -236,21 +234,6 @@
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.DoubleClick += new System.EventHandler(this.buttonOpen_Click);
-            // 
-            // compositionsBindingSource
-            // 
-            this.compositionsBindingSource.DataMember = "Compositions";
-            this.compositionsBindingSource.DataSource = this.compositionDataSet;
-            // 
-            // compositionDataSetBindingSource
-            // 
-            this.compositionDataSetBindingSource.DataSource = this.compositionDataSet;
-            this.compositionDataSetBindingSource.Position = 0;
-            // 
-            // compositionDataSet
-            // 
-            this.compositionDataSet.DataSetName = "CompositionDataSet";
-            this.compositionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // backgroundWorkerAdding
             // 
@@ -281,10 +264,6 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Visible = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // compositionsTableAdapter
-            // 
-            this.compositionsTableAdapter.ClearBeforeFill = true;
             // 
             // backgroundWorkerExport
             // 
@@ -322,20 +301,33 @@
             this.buttonRandom.UseVisualStyleBackColor = true;
             this.buttonRandom.Click += new System.EventHandler(this.buttonRandom_Click);
             // 
-            // OrigName
+            // compositionsBindingSource
             // 
-            this.OrigName.HeaderText = "orid name";
-            this.OrigName.Name = "OrigName";
-            this.OrigName.ReadOnly = true;
+            this.compositionsBindingSource.DataMember = "Compositions";
+            this.compositionsBindingSource.DataSource = this.compositionDataSet;
             // 
-            // numberPhotosDataGridViewTextBoxColumn
+            // compositionDataSet
             // 
-            this.numberPhotosDataGridViewTextBoxColumn.DataPropertyName = "NumberPhotos";
-            this.numberPhotosDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.numberPhotosDataGridViewTextBoxColumn.HeaderText = "Number";
-            this.numberPhotosDataGridViewTextBoxColumn.Name = "numberPhotosDataGridViewTextBoxColumn";
-            this.numberPhotosDataGridViewTextBoxColumn.ReadOnly = true;
-            this.numberPhotosDataGridViewTextBoxColumn.Width = 55;
+            this.compositionDataSet.DataSetName = "CompositionDataSet";
+            this.compositionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // compositionsTableAdapter
+            // 
+            this.compositionsTableAdapter.ClearBeforeFill = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 30;
+            // 
+            // OrigNameDataGridViewTextBoxColumn
+            // 
+            this.OrigNameDataGridViewTextBoxColumn.HeaderText = "orid name";
+            this.OrigNameDataGridViewTextBoxColumn.Name = "OrigNameDataGridViewTextBoxColumn";
+            this.OrigNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -345,14 +337,14 @@
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // idDataGridViewTextBoxColumn
+            // numberPhotosDataGridViewTextBoxColumn
             // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Visible = false;
-            this.idDataGridViewTextBoxColumn.Width = 30;
+            this.numberPhotosDataGridViewTextBoxColumn.DataPropertyName = "NumberPhotos";
+            this.numberPhotosDataGridViewTextBoxColumn.FillWeight = 50F;
+            this.numberPhotosDataGridViewTextBoxColumn.HeaderText = "Number";
+            this.numberPhotosDataGridViewTextBoxColumn.Name = "numberPhotosDataGridViewTextBoxColumn";
+            this.numberPhotosDataGridViewTextBoxColumn.ReadOnly = true;
+            this.numberPhotosDataGridViewTextBoxColumn.Width = 55;
             // 
             // MainForm
             // 
@@ -379,7 +371,6 @@
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositionsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.compositionDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.compositionDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -394,7 +385,6 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Label labelNameComposistion;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource compositionDataSetBindingSource;
         private CompositionDataSet compositionDataSet;
         private System.Windows.Forms.BindingSource compositionsBindingSource;
         private CompositionDataSetTableAdapters.CompositionsTableAdapter compositionsTableAdapter;
@@ -415,8 +405,8 @@
         private System.ComponentModel.BackgroundWorker backgroundWorkerChangeKey;
         private System.Windows.Forms.Button buttonAddLink;
         private System.Windows.Forms.Button buttonRandom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrigName;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrigNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberPhotosDataGridViewTextBoxColumn;
     }

@@ -423,6 +423,16 @@ namespace Photo_cipher.Forms
                 Photo photo = db.Photos.Find(composition.IdFirstPhoto);
                 Image newImage = new NewImage(photo).DeShifrovkaImage(Key);
 
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (row.Cells[OrigNameDataGridViewTextBoxColumn.Index].Value != null)
+                        continue;
+                        row.Cells[OrigNameDataGridViewTextBoxColumn.Index].Value = Librari.DeShifrovka(
+                                row.Cells[nameDataGridViewTextBoxColumn.Index].Value.ToString(),
+                                Key
+                            );
+                } // Translation
+
                 pictureBox1.Image = newImage;
                 RightKey = true;
             }
@@ -431,9 +441,9 @@ namespace Photo_cipher.Forms
                 pictureBox1.Image = pictureBox1.ErrorImage;
                 RightKey = false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                labelNameComposistion.Text = "Error";
+                labelNameComposistion.Text = ex.Message;
                 pictureBox1.Image = pictureBox1.ErrorImage;
                 RightKey = false;
             }
