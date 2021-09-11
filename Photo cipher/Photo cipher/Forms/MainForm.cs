@@ -21,7 +21,7 @@ namespace Photo_cipher.Forms
         string Key;
         const string NameFolderCompositions = "CompositionImage";
         const string NameFolderKeys         = "Keys";
-        private const string Connect = @"Data Source=WIN-TUCQMTTP77C;Initial Catalog=Composition;
+        private const string Connect = @"Data Source=DESKTOP-T3V99U8;Initial Catalog=Composition;
                 Integrated Security=True;AttachDbFileName=D:\Anime\DataBase\Composition.mdf";
 
         int NowId {
